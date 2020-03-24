@@ -1,6 +1,7 @@
 package com.restaurant.command.menu;
 
 import com.restaurant.command.Command;
+import com.restaurant.domain.Dish;
 import com.restaurant.domain.Order;
 import com.restaurant.domain.OrderStatus;
 import com.restaurant.domain.User;
@@ -10,6 +11,7 @@ import com.restaurant.service.OrderService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Optional;
 
 public class IndexCommand implements Command {
@@ -39,7 +41,10 @@ public class IndexCommand implements Command {
             orderService.addOrder(order);
         }
         else {
-            inBasket = dishService.getDishesByOrderId(formingOrder.get().getId()).size();
+            Map<Dish, Integer> dishIntegerMap = dishService.getDishesByOrderId(formingOrder.get().getId());
+            for (Map.Entry<Dish, Integer> entry : dishIntegerMap.entrySet()) {
+                inBasket += entry.getValue();
+            }
         }
 
         session.setAttribute("inBasket", inBasket);

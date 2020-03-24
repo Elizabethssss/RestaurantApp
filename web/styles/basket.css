@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css?family=Lato|Pacifico|Righteous|Roboto+Condensed|Ubuntu|Montserrat&display=swap");
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding: 0%;
+    margin: 0%;
+    font-family: "Lato";
+}
+
+.navbar-brand {
+    font-family: "Pacifico";
+    font-size: 35px;
+    color: orange !important;
+}
+
+.nav-link {
+    font-size: 18px;
+    margin: 15px;
+    color: #000 !important;
+    font-family: "Roboto Condensed";
+}
+
+.nav-link:hover {
+    color: orange !important;
+}
+
+.active .nav-link {
+    color: orange !important;
+}
+
+.menu-right-btn {
+    padding: 13px 46px;
+    margin-right: 4%;
+    background-color: transparent;
+    transition: all 300ms ease-in;
+}
+
+/* Section 1 */
+.basket-title {
+    padding-left: 100px;
+    padding-top: 20px;
+}
+
+.basket-item {
+    border-bottom: 1px solid #df8f0c;
+    margin: 20px auto;
+    padding-bottom: 15px;
+}
+.basket-item-img {
+    margin: 5px 20px 0 0;
+    max-width: 270px;
+    float: left;
+}
+.basket-item-img img {
+    border-radius: 5px;
+    width: 100%;
+    max-width: 270px;
+}
+
+
+
+/* counter */
+.number {
+    display: inline-block;
+    margin-left: 5px;
+}
+.counter {
+    vertical-align: middle;
+    margin: 0;
+    width: 45px;
+    border-radius: 0px !important;
+    text-align: center;
+}
+.up_count {
+    margin-left: -4px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.down_count {
+    margin-right: -4px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.counter,
+.up_count,
+.down_count{
+    display: inline-block;
+}
+
+.price {
+    display: inline-block;
+    font-size: 22px;
+    margin-left: 20px;
+    vertical-align: middle;
+}
+.price span {
+    font-weight: bold;
+    color: #f6731c;
+}
+
+@media screen and (max-width: 767px) {
+    .basket-item-img {
+        max-width: 40%;
+    }
+    .basket-item h2 {
+        font-size: 20px;
+    }
+    .price {
+        font-size: 15px;
+    }
+}
+
+.close{
+    float: right;
+}
+
+.total-price{
+    margin-right: 130px;
+}
+
+/* Footer */
+
+.section-5 h4 {
+    margin-top: 15px;
+    font-family: "Montserrat";
+    font-size: 20px;
+    color: orange;
+}
+
+.section-5 h4 em {
+    color: red !important;
+}
+
+.bg {
+    background-color: rgba(255, 164, 14, 0.16);
+}

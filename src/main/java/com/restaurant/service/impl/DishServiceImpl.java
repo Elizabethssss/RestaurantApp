@@ -8,6 +8,7 @@ import com.restaurant.service.DishService;
 import com.restaurant.service.mapper.Mapper;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -28,11 +29,11 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Map<Long, Dish> getDishesByOrderId(Long orderId) {
-        Map<Long, DishEntity> entityMap = dishDao.getDishesByOrderId(orderId);
-        Map<Long, Dish> dishMap = new HashMap<>();
-        for (Map.Entry<Long, DishEntity> entry : entityMap.entrySet()) {
-            dishMap.put(entry.getKey(), dishMapper.mapEntityToDomain(entry.getValue()));
+    public Map<Dish, Integer> getDishesByOrderId(Long orderId) {
+        Map<DishEntity, Integer> entityMap = dishDao.getDishesByOrderId(orderId);
+        Map<Dish, Integer> dishMap = new LinkedHashMap<>();
+        for (Map.Entry<DishEntity, Integer> entry : entityMap.entrySet()) {
+            dishMap.put(dishMapper.mapEntityToDomain(entry.getKey()), entry.getValue());
         }
         return dishMap;
     }

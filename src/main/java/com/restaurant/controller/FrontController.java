@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet(name = "FrontController", urlPatterns = {"/login", "/signUp", "/logout", "/index", "/menu", "/profile",
-        "/dish", "/buy"})
+        "/dish", "/buy", "/basket"})
 public class FrontController extends HttpServlet {
     private final Map<String, Command> commands;
 

@@ -3,6 +3,7 @@ package com.restaurant.dao.impl;
 import com.restaurant.dao.DishDao;
 import com.restaurant.dao.Page;
 import com.restaurant.dao.connection.HikariCPManager;
+import com.restaurant.domain.Dish;
 import com.restaurant.domain.DishType;
 import com.restaurant.entity.DishEntity;
 import com.restaurant.exception.DataBaseException;
@@ -12,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -33,14 +35,25 @@ public class DishDaoImpl extends AbstractDao<DishEntity> implements DishDao {
     }
 
     @Override
-    public Map<Long, DishEntity> getDishesByOrderId(Long orderId) {
-        Map<Long, DishEntity> entityMap = new HashMap<>();
+    public Map<DishEntity, Integer> getDishesByOrderId(Long orderId) {
+        Map<DishEntity, Integer> entityMap = new LinkedHashMap<>();
         try (Connection connection = getConnector().getConnection();
              PreparedStatement ps = connection.prepareStatement(FIND_BY_ORDER_ID_QUERY)) {
             ps.setObject(1, orderId);
             try(final ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    entityMap.put(rs.getLong("orders_dishes.id"), parseResultSet(rs));
+                    DishEntity entity = parseResultSet(rs);
+                    if(entityMap.isEmpty() || entityMap.keySet().stream()
+                            .noneMatch(dishEntity -> dishEntity.getId().equals(entity.getId()))) {
+                        entityMap.put(entity, 1);
+                    }
+                    else {
+                        for (Map.Entry<DishEntity, Integer> entry : entityMap.entrySet()) {
+                            if (entry.getKey().getId().equals(entity.getId())) {
+                                entityMap.replace(entry.getKey(), entry.getValue() + 1);
+                            }
+                        }
+                    }
                 }
             }
         } catch (SQLException e) {

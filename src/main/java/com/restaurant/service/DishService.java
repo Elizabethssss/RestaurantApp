@@ -11,5 +11,5 @@ public interface DishService{
     List<Dish> getDishesByType(String dishType, Page page);
     int count(String dishType);
     Optional<Dish> getDishById(Long dishId);
-    Map<Long, Dish> getDishesByOrderId(Long orderId);
+    Map<Dish, Integer> getDishesByOrderId(Long orderId);
 }

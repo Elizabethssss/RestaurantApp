@@ -8,5 +8,5 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface DishDao extends PageableDao<DishEntity> {
-    Map<Long, DishEntity> getDishesByOrderId(Long orderId);
+    Map<DishEntity, Integer> getDishesByOrderId(Long orderId);
 }

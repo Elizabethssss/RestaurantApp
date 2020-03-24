@@ -29,7 +29,7 @@
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
-                <a href="#" class="d-flex btn menu-right-btn btn-warning">Basket: <span class="ml-2">
+                <a href="basket" class="d-flex btn menu-right-btn btn-warning">Basket: <span class="ml-2">
                     ${sessionScope.get("inBasket")}
                 </span></a>
             </form>

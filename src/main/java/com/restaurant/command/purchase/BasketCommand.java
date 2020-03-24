@@ -31,10 +31,10 @@ public class BasketCommand implements Command {
 
         final Optional<Order> order = orderService.getOrderByStatus(OrderStatus.FORMED);
         final Long orderId = order.get().getId();
-        final Map<Long, Dish> dishes = dishService.getDishesByOrderId(orderId);
+        final Map<Dish, Integer> dishes = dishService.getDishesByOrderId(orderId);
         long totalPrice = 0;
-        for (Map.Entry<Long, Dish> entry : dishes.entrySet()) {
-            totalPrice += entry.getValue().getPrice();
+        for (Map.Entry<Dish, Integer> entry : dishes.entrySet()) {
+            totalPrice += entry.getKey().getPrice();
         }
 
         request.setAttribute("dishes", dishes);
