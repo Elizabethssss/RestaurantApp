@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css?family=Lato|Pacifico|Righteous|Roboto+Condensed|Ubuntu|Montserrat&display=swap");
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Lato";
+}
+
+.navbar-brand {
+    font-family: "Pacifico";
+    font-size: 35px;
+    color: orange !important;
+}
+
+.nav-link {
+    font-size: 18px;
+    margin: 15px;
+    color: #000 !important;
+    font-family: "Roboto Condensed";
+}
+
+.nav-link:hover {
+    color: orange !important;
+}
+
+.active .nav-link {
+    color: orange !important;
+}
+
+.menu-right-btn {
+    padding: 13px 46px;
+    margin-right: 4%;
+    background-color: transparent;
+    transition: all 300ms ease-in;
+}
+
+/* Breadcrumb */
+.breadcrumb-item{
+    font-family: "Roboto Condensed";
+    font-size: 18px;
+    margin: 8px 0 8px 8px;
+}
+
+.breadcrumb-item a{
+    color: #000 !important;
+}
+
+
+.breadcrumb-item:hover a{
+    color: orange !important;
+    text-decoration: none;
+}
+
+/* Section-4 */
+
+.section-4 {
+    margin-top: -1%;
+}
+
+.section-4 .row .col-md-6 {
+    margin-top: 7%;
+    margin-bottom: 8%;
+}
+
+.section-4 button {
+    color: #ffa81a;
+    font-size: 40px;
+    text-decoration: none;
+}
+
+.section-4 .para-1 {
+    color: #fff;
+    font-family: "Roboto Condensed";
+    margin-top: 4%;
+    font-size: 23px;
+}
+
+.price {
+    color: #ffa81a;
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+.weight {
+    color: white;
+    margin-bottom: 0;
+}
+
+.carous {
+    margin-top: 20px;
+}
+
+.carous h1 span {
+    padding-bottom: 7px;
+    border-bottom: 5px orange solid;
+}
+
+/* Footer */
+
+.section-5 h4 {
+    margin-top: 15px;
+    font-family: "Montserrat";
+    font-size: 20px;
+    color: orange;
+}
+
+.section-5 h4 em {
+    color: red !important;
+}
+
+.ingredient-item {
+    text-align: center;
+    margin: 10px;
+}
+
+.ingredient-item h4 {
+    font-size: 14px;
+}
+
+.ingredient-item > div {
+    margin: 10px;
+}
+
+.hide {
+    display: none;
+}

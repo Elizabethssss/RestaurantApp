@@ -1,0 +1,203 @@
+@import url("https://fonts.googleapis.com/css?family=Lato|Pacifico|Righteous|Roboto+Condensed|Ubuntu|Montserrat&display=swap");
+
+body {
+    padding: 0%;
+    margin: 0%;
+    font-family: "Lato";
+}
+
+.navbar-brand {
+    font-family: "Pacifico";
+    font-size: 35px;
+    color: orange !important;
+}
+
+.nav-link:hover {
+    color: orange !important;
+}
+
+
+.menu-right-btn {
+    padding: 13px 46px;
+    margin-right: 4%;
+    background-color: transparent;
+    transition: all 300ms ease-in;
+}
+
+.site-content {
+    background-image: url("https://images.pexels.com/photos/543733/pexels-photo-543733.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.SALAD {
+    background-image: url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+}
+
+.SNACK {
+    background-image: url("https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position-y: -150px;
+}
+
+.SOUP {
+    background-image: url("https://images.pexels.com/photos/5794/soup-leek-potato.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position-y: -200px;
+}
+
+.MAIN_DISH {
+    background-image: url("https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position-y: -375px;
+}
+
+.DESSERT {
+    background-image: url("https://images.pexels.com/photos/827513/pexels-photo-827513.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position-y: -350px;
+}
+
+.DRINK {
+    background-image: url("https://images.pexels.com/photos/1028637/pexels-photo-1028637.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position-y: -380px;
+    background-position-x: -200px;
+}
+
+.BREAKFAST {
+    background-image: url("https://images.pexels.com/photos/2113556/pexels-photo-2113556.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position-y: -600px;
+}
+
+.LUNCH {
+    background-image: url("https://images.pexels.com/photos/5876/food-salad-healthy-vegetables.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position-y: -400px;
+}
+
+.HOLIDAY {
+    background-image: url("https://images.pexels.com/photos/2814828/pexels-photo-2814828.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position-y: -350px;
+}
+
+.site-title,
+.site-desc {
+    color: yellow;
+    font-family: "Righteous";
+    text-align: center;
+}
+
+.site-title {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 60px;
+}
+
+.site-desc {
+    font-size: 16px;
+}
+
+.site-btn1 {
+    margin: 20px;
+    background-color: #2e2d31;
+    white-space: nowrap;
+}
+
+/* SECTION-1 */
+
+.container {
+    margin-top: 5%;
+    margin-bottom: 3%;
+    text-align: center;
+}
+
+.single-content {
+    position: relative;
+    transition: 0.3s;
+    box-shadow: 8px 8px 7px 1px rgb(125, 119, 119);
+}
+
+.single-content .text-content,
+.single-content:after {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+}
+
+.single-content:after {
+    content: "";
+    display: block;
+    background: orange;
+    top: 20px;
+    bottom: 20px;
+    opacity: 0;
+    transform: rotate3d(-1, 1, 0, 100deg);
+    transition: 0.4s;
+}
+
+.single-content:hover:after {
+    opacity: 1;
+    transform: rotate3d(0, 0, 0, 0deg);
+}
+
+.single-content img {
+    width: 100%;
+    height: auto;
+}
+
+.text-content {
+    top: 45%;
+    opacity: 0;
+    z-index: 1;
+    transform: translate(10%, -30%);
+    transition: 0.3s;
+    text-align: center;
+    color: #222;
+}
+
+.text-content h4 {
+    font-family: "Righteous";
+}
+
+.single-content:hover .text-content {
+    opacity: 1;
+    transform: translate(0, -50%);
+    transition-delay: 0.3s;
+}
+
+.section-5 h4 {
+    margin-top: 15px;
+    font-family: "Montserrat";
+    font-size: 20px;
+    color: orange;
+}
+
+.section-5 h4 em {
+    color: red !important;
+}
+
+.menu-list {
+    margin: 20px;
+}
+
+.shadow {
+    background: linear-gradient(to top, rgba(43,43,43,0) 0%, rgba(43,43,43,0.7) 100%);
+}
+.my-row {
+    margin: 0;
+}
+.my-col {
+    margin: 20px 0;
+}
+
+.hide {
+    display: none;
+}
+
+.page-btn {
+    width: 150px;
+    font-size: large;
+    background-color: #343a40!important;
+}
+
+.btn-dis {
+    background-color: #949393ad !important;
+    color: black !important;
+    border-color: black;
+}
+

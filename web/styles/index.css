@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css?family=Lato|Pacifico|Righteous|Roboto+Condensed|Ubuntu|Montserrat&display=swap");
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.site-content {
+  background-image: url("https://images.pexels.com/photos/543733/pexels-photo-543733.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.site-title, .site-desc {
+  color: yellow;
+  font-family: "Righteous", sans-serif;
+}
+
+.site-title {
+  margin-top: 27%;
+  margin-bottom: 6%;
+  font-size: 60px;
+}
+
+.site-desc {
+  font-size: 16px;
+  padding-left: 18%;
+}
+
+.site-btn1 {
+  margin-left: 42%;
+  background-color: #2e2d31;
+}
+
+.site-btn2 {
+  background-color: #2e2d31;
+  margin-left: 40px;
+}
+
+.site-btn1,
+.site-btn2 {
+  margin-top: 5%;
+  margin-bottom: 25%;
+}
+
+/* Section-1 */
+
+.section-1 .heading-1 {
+  margin-top: 8%;
+}
+
+.section-1 .heading-2 {
+  margin-top: 1%;
+  font-size: 39px;
+}
+
+.section-1 .para-1 {
+  width: 60%;
+  margin-left: 20%;
+  margin-bottom: 5%;
+}
+
+.section-1 .card-text,
+.para-1 {
+  color: rgba(0, 0, 0, 0.59);
+}
+
+.section-1 {
+  margin-bottom: 8%;
+}
+
+.card {
+  width: 20rem;
+}
+
+/* Section-2 */
+
+.section-2 .container-fluid {
+  background-image: url("../img/img4.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.section-2 .heading-1 {
+  margin-top: 20%;
+  margin-bottom: 4%;
+  font-family: "Righteous", sans-serif;
+  width: 80%;
+  color: whitesmoke;
+}
+
+.section-2 .para {
+  width: 80%;
+  font-family: "Ubuntu", sans-serif;
+  color: whitesmoke;
+  margin-bottom: 7%;
+}
+
+.section-2 .btn {
+  margin-bottom: 15%;
+  width: 30%;
+  padding: 2% 5%;
+}
+
+/* Section-3 */
+
+.section-3 {
+  margin-top: 6%;
+}
+
+.section-3 i {
+  color: #ffa81a;
+}
+
+.section-3 p {
+  color: rgba(0, 0, 0, 0.59);
+}
+
+/* Section-4 */
+
+.section-4 {
+  margin-top: 50px;
+}
+
+.section-4 .row .col-md-7,
+.col-md-5 {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.section-4 a {
+  color: #ffa81a;
+  font-size: 40px;
+  text-decoration: none;
+}
+
+.section-4 .para-1 {
+  color: #fff;
+  font-family: "Roboto Condensed", sans-serif;
+  margin-top: 7%;
+  font-size: 23px;
+}
+
+.section-5 h4 {
+  margin-top: 15px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  color: orange;
+}
+
+.section-5 h4 em {
+  color: red !important;
+}
+
+@media sreen and (max-width: 768px) {
+  .section-1 .card {
+    width: 14rem;
+  }
+
+  .section-4 .cal-md-7 img {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .site-content .site-title {
+    font-size: 30px;
+    padding-left: 15%;
+  }
+
+  .site-content .site-btn2 {
+    display: none;
+  }
+
+  .site-content .site-btn1 {
+    margin-left: 15%;
+  }
+
+  .section-1 .heading-1,
+  .section-1 .heading-2 {
+    font-size: 25px;
+  }
+
+  .section-1 .col-md-4 {
+    padding: 5%;
+    margin-left: 8%;
+  }
+
+  .section-1 .card {
+    width: 15rem;
+  }
+
+  .section-4 .col-md-5 {
+    padding: 0 15%;
+  }
+}
+
+.shadow {
+  background: linear-gradient(to top, rgba(43,43,43,0) 0%, rgba(43,43,43,0.7) 100%);
+}
+
