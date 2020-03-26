@@ -6,7 +6,6 @@ import com.restaurant.command.menu.IndexCommand;
 import com.restaurant.command.menu.MenuCommand;
 import com.restaurant.command.purchase.BasketCommand;
 import com.restaurant.command.purchase.BuyingCommand;
-import com.restaurant.command.purchase.RemoveDishCommand;
 import com.restaurant.command.user.LoginCommand;
 import com.restaurant.command.user.SignUpCommand;
 import com.restaurant.dao.DishDao;
@@ -86,7 +85,6 @@ public final class ApplicationInjector {
     private static final Command DISH_COMMAND = new DishCommand(DISH_SERVICE, INGREDIENT_SERVICE);
     private static final Command BUYING_COMMAND = new BuyingCommand(ORDER_SERVICE);
     private static final Command BASKET_COMMAND = new BasketCommand(ORDER_SERVICE, DISH_SERVICE);
-    private static final Command REMOVE_DISH_COMMAND = new RemoveDishCommand(ORDER_SERVICE);
 
     private static final Map<String, Command> COMMANDS = initCommands();
 
@@ -100,7 +98,6 @@ public final class ApplicationInjector {
         authorizationCommands.put("/dish", DISH_COMMAND);
         authorizationCommands.put("/buy", BUYING_COMMAND);
         authorizationCommands.put("/basket", BASKET_COMMAND);
-        authorizationCommands.put("/removeDish", REMOVE_DISH_COMMAND);
 //        authorizationCommands.put("/pay", PAYING_COMMAND);
 //        authorizationCommands.put("/profile", PROFILE_COMMAND);
 

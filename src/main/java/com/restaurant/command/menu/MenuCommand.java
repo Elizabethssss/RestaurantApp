@@ -35,11 +35,14 @@ public class MenuCommand implements Command {
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("dishType", dishType);
         request.setAttribute("mActive", true);
+
+        request.setAttribute("responseType", "jsp");
         return "pages/menu.jsp";
     }
 
     @Override
     public String execute(HttpServletRequest request) {
+        request.setAttribute("responseType", "jsp");
         return "pages/menu.jsp";
     }
 }

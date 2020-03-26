@@ -20,6 +20,8 @@ public class BuyingCommand implements Command {
     @Override
     public String show(HttpServletRequest request) {
 //        request.setAttribute("bundle", localization.getLocalizationBundle(request));
+
+        request.setAttribute("responseType", "jsp");
         return "pages/dish.jsp";
     }
 
@@ -30,7 +32,7 @@ public class BuyingCommand implements Command {
 //        final ResourceBundle bundle = localization.getLocalizationBundle(request);
 
         final long dishId = Long.parseLong(request.getParameter("id"));
-        Optional<Order> formingOrder = orderService.getOrderByStatus(OrderStatus.FORMED);
+        Optional<Order> formingOrder = orderService.getOrderByStatusAndUserId(OrderStatus.FORMED, user.getId());
 //        user.getOrders().add(formingOrder.get());
         final Long orderId = formingOrder.get().getId();
         orderService.addDishToOrder(orderId, dishId);
@@ -43,6 +45,7 @@ public class BuyingCommand implements Command {
         session.setAttribute("user", user);
         session.setAttribute("message", message);
 
+        request.setAttribute("responseType", "servlet");
         return "/dish?id=" + dishId;
 //        return "/exhibition?id=" + exhibitionId + "&page=" + page + "&lang=" + session.getAttribute("locale");
     }

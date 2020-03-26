@@ -31,7 +31,7 @@ public class IndexCommand implements Command {
 //        final ResourceBundle bundle = localization.getLocalizationBundle(request);
 //        request.setAttribute("bundle", bundle);
 
-        Optional<Order> formingOrder = orderService.getOrderByStatus(OrderStatus.FORMED);
+        Optional<Order> formingOrder = orderService.getOrderByStatusAndUserId(OrderStatus.FORMED, user.getId());
         if(!formingOrder.isPresent()) {
             Order order = Order.builder()
                     .withStatus(OrderStatus.FORMED)
@@ -49,12 +49,15 @@ public class IndexCommand implements Command {
 
         session.setAttribute("inBasket", inBasket);
         request.setAttribute("hActive", true);
+        request.setAttribute("responseType", "jsp");
         return "pages/index.jsp";
     }
 
     @Override
     public String execute(HttpServletRequest request) {
 //        request.setAttribute("bundle", localization.getLocalizationBundle(request));
+
+        request.setAttribute("responseType", "jsp");
         return "pages/index.jsp";
     }
 }

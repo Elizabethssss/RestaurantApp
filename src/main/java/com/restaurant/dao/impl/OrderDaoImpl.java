@@ -2,7 +2,6 @@ package com.restaurant.dao.impl;
 
 import com.restaurant.dao.OrderDao;
 import com.restaurant.dao.connection.HikariCPManager;
-import com.restaurant.domain.Order;
 import com.restaurant.domain.OrderStatus;
 import com.restaurant.entity.OrderEntity;
 import com.restaurant.exception.DataBaseException;
@@ -21,10 +20,10 @@ public class OrderDaoImpl extends AbstractDao<OrderEntity> implements OrderDao {
     public static final String DELETE_QUERY = "DELETE FROM orders WHERE id= ?;";
     public static final String FIND_BY_ID_QUERY = "SELECT * FROM orders WHERE id = ?;";
     public static final String FIND_BY_USER_ID_QUERY = "SELECT * FROM orders WHERE user_id = ?";
-    public static final String FIND_BY_STATUS_QUERY = "SELECT * FROM orders WHERE status = ?";
+    public static final String FIND_BY_STATUS_AND_USER_ID_QUERY = "SELECT * FROM orders WHERE status = ? AND user_id = ?";
 
     public static final String SAVE_ORDER_DISH_QUERY = "INSERT INTO orders_dishes VALUES (DEFAULT, ?, ?);";
-    public static final String DELETE_ORDER_DISH_QUERY = "DELETE FROM orders_dishes WHERE id= ?;";
+    public static final String DELETE_ORDER_DISH_QUERY = "DELETE FROM orders_dishes WHERE order_id= ? AND dish_id = ? LIMIT 1;";
 
     public OrderDaoImpl(HikariCPManager connector) {
         super(connector);
@@ -36,9 +35,23 @@ public class OrderDaoImpl extends AbstractDao<OrderEntity> implements OrderDao {
     }
 
     @Override
-    public Optional<OrderEntity> getOrderByStatus(String status) {
-        return findByParam(status, FIND_BY_STATUS_QUERY);
+    public Optional<OrderEntity> getOrderByStatusAndUserId(String status, Long userId) {
+        try(Connection connection = getConnector().getConnection();
+            PreparedStatement ps = connection.prepareStatement(FIND_BY_STATUS_AND_USER_ID_QUERY)) {
+            ps.setString(1, status);
+            ps.setLong(2, userId);
+            try(final ResultSet rs = ps.executeQuery()) {
+                if(rs.next()) {
+                    return Optional.ofNullable(parseResultSet(rs));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(String.format(ERROR_MESSAGE, FIND_BY_STATUS_AND_USER_ID_QUERY, e));
+            throw new DataBaseException("Error in getting from db", e);
+        }
+        return Optional.empty();
     }
+
 
     @Override
     public void addDishToOrder(Long orderId, Long dishId) {
@@ -54,11 +67,15 @@ public class OrderDaoImpl extends AbstractDao<OrderEntity> implements OrderDao {
     }
 
     @Override
-    public void deleteOrderDishById(Long orderDishId) {
+    public void deleteOrderDishById(Long orderId, Long dishId, Integer quantity) {
         try(Connection connection = getConnector().getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_ORDER_DISH_QUERY)) {
-            ps.setLong(1, orderDishId);
-            ps.executeUpdate();
+            ps.setLong(1, orderId);
+            ps.setLong(2, dishId);
+            while (quantity != 0) {
+                ps.executeUpdate();
+                quantity--;
+            }
         } catch (SQLException e) {
             LOGGER.error(String.format(ERROR_MESSAGE, DELETE_ORDER_DISH_QUERY, e));
             throw new DataBaseException("Error in deleting from db", e);

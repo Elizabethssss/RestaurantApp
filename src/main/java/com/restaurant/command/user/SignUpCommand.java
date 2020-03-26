@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class SignUpCommand implements Command {
     private final UserService userService;
@@ -29,6 +28,7 @@ public class SignUpCommand implements Command {
     public String show(HttpServletRequest request) {
         //request.setAttribute("bundle", localization.getLocalizationBundle(request));
         request.setAttribute("rightSide", true);
+        request.setAttribute("responseType", "jsp");
         return "pages/authorization.jsp";
     }
 
@@ -56,10 +56,13 @@ public class SignUpCommand implements Command {
             final HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setAttribute("inBasket", 0);
+
+            request.setAttribute("responseType", "servlet");
             return "/index";
         }
         else {
             setErrorAttributes(request, username, email, errorsMessages);
+            request.setAttribute("responseType", "jsp");
             return "pages/authorization.jsp";
         }
     }

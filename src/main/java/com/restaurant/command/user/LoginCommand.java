@@ -2,7 +2,6 @@ package com.restaurant.command.user;
 
 import com.restaurant.command.Command;
 import com.restaurant.domain.Order;
-import com.restaurant.domain.OrderStatus;
 import com.restaurant.domain.User;
 import com.restaurant.service.OrderService;
 import com.restaurant.service.UserService;
@@ -28,6 +27,8 @@ public class LoginCommand implements Command {
     @Override
     public String show(HttpServletRequest request) {
 //        request.setAttribute("bundle", localization.getLocalizationBundle(request));
+
+        request.setAttribute("responseType", "jsp");
         return "pages/authorization.jsp";
     }
 
@@ -43,9 +44,11 @@ public class LoginCommand implements Command {
             request.setAttribute("email", email);
             request.setAttribute("error", true);
             request.setAttribute("errorMessage", "Wrong email or password!");
+            request.setAttribute("responseType", "jsp");
             return "pages/authorization.jsp";
         } else {
             setUserToSession(request, checkUser);
+            request.setAttribute("responseType", "servlet");
             return "/index";
 //            return "/index?lang=" + session.getAttribute("locale");
         }

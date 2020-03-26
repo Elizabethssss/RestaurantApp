@@ -1,16 +1,12 @@
 package com.restaurant.service.impl;
 
 import com.restaurant.dao.OrderDao;
-import com.restaurant.domain.Dish;
 import com.restaurant.domain.Order;
 import com.restaurant.domain.OrderStatus;
 import com.restaurant.entity.OrderEntity;
 import com.restaurant.service.OrderService;
 import com.restaurant.service.mapper.Mapper;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,8 +27,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<Order> getOrderByStatus(OrderStatus status) {
-        return orderDao.getOrderByStatus(status.name()).map(orderMapper::mapEntityToDomain);
+    public Optional<Order> getOrderByStatusAndUserId(OrderStatus status, Long userId) {
+        return orderDao.getOrderByStatusAndUserId(status.name(), userId).map(orderMapper::mapEntityToDomain);
     }
 
     @Override
@@ -46,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrderDishById(Long orderDishId) {
-        orderDao.deleteOrderDishById(orderDishId);
+    public void deleteOrderDishById(Long orderId, Long dishId, Integer quantity) {
+        orderDao.deleteOrderDishById(orderId, dishId, quantity);
     }
 }

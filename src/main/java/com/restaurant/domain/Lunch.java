@@ -13,7 +13,7 @@ public class Lunch {
     private final LunchType lunchType;
     private final List<Dish> dishes;
 
-    public Lunch(Lunch.Builder builder) {
+    public Lunch(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.description = builder.description;
@@ -56,7 +56,7 @@ public class Lunch {
         return dishes;
     }
 
-    public static Lunch.Builder builder() { return new Lunch.Builder(); }
+    public static Builder builder() { return new Builder(); }
 
     public static class Builder {
         private Long id;
@@ -71,42 +71,42 @@ public class Lunch {
         private Builder() {
         }
 
-        public Lunch.Builder withId(Long id) {
+        public Builder withId(Long id) {
             this.id = id;
             return this;
         }
 
-        public Lunch.Builder withName(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Lunch.Builder withDescription(String description) {
+        public Builder withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        public Lunch.Builder withTimeFrom(LocalDate timeFrom) {
+        public Builder withTimeFrom(LocalDate timeFrom) {
             this.timeFrom = timeFrom;
             return this;
         }
 
-        public Lunch.Builder withTimeTo(LocalDate timeTo) {
+        public Builder withTimeTo(LocalDate timeTo) {
             this.timeTo = timeTo;
             return this;
         }
 
-        public Lunch.Builder withImg(String img) {
+        public Builder withImg(String img) {
             this.img = img;
             return this;
         }
 
-        public Lunch.Builder withDishes(List<Dish> dishes) {
+        public Builder withDishes(List<Dish> dishes) {
             this.dishes = dishes;
             return this;
         }
 
-        public Lunch.Builder withLunchType(LunchType lunchType) {
+        public Builder withLunchType(LunchType lunchType) {
             this.lunchType = lunchType;
             return this;
         }

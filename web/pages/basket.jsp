@@ -13,8 +13,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap CDN CSS file-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../libs/bootstrap-4.4.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../libs/fontawesome-free-5.12.1-web/css/all.css"/>
     <link rel="stylesheet" href="../styles/basket.css" />
     <link rel="stylesheet" href="../styles/commons/header.css" />
@@ -26,13 +25,13 @@
 <main>
     <div class="section-1 bg">
         <div class="container">
-            <h1 class="basket-title">Your dishes:</h1>
+            <h1 class="basket-title"><span>Your dishes:</span></h1>
             <div class="row">
                 <c:forEach var="dish" items="${requestScope.dishes}">
-                    <div class="basket-item col-10">
-                        <a href="#" class="close"><p class="m-0">x</p></a>
+                    <div class="basket-item fade-out col-10" data-dish-id="${dish.key.id}">
+                        <button class="close" data-dish-action="remove">x</button>
                         <div class="basket-item-img">
-                            <img src="../img/dishes-s/${dish.key.img}" alt=""/>
+                            <img src="../img/dishes-s/${dish.key.img}" alt="" />
                         </div>
                         <div>
                             <h2>${dish.key.name}</h2>
@@ -40,24 +39,23 @@
                                 ${dish.key.about}
                             </p>
                             <div class="number">
-                                <button class="down_count btn btn-dark" title="Down">
-                                    <span>&#8722;</span>
-                                </button>
-                                <h3 class="counter">${dish.value}</h3>
-                                <button class="up_count btn btn-dark" title="Up">
-                                    <span>&#43;</span>
-                                </button>
+                                <button class="down_count btn p-m-btn" title="Down" data-dish-action="minus"
+                                        ${dish.value == 1 ? 'disabled':''}>–</button>
+                                <h3 class="counter number-of-item">${dish.value}</h3>
+                                <button class="up_count btn p-m-btn" title="Up" data-dish-action="plus">+</button>
                             </div>
                             <p class="mt-3 price">
-                                Price: <span>${dish.key.price * dish.value}</span> UAH
+                            Price: <span class="number-of-item">4</span> <span class="price-ex" style="display:inline-block">x</span> <span>${dish.key.getPriceInt()}</span> UAH = <span class="price-of-items">567</span> UAH
                             </p>
                         </div>
                     </div>
                 </c:forEach>
             </div>
-            <div class="total-price mt-4 text-right">
-                <h2 class="total">Total: <span>123456789$</span></h2>
-                <button class="btn btn-dark mb-4">Buy</button>
+            <div class="row">
+                <div class="col-10 total-price mt-4 text-right">
+                    <h2 class="total">Total: <span id="totalPrice">${requestScope.totalPrice}</span> UAH</h2>
+                    <button class="btn btn-dark mb-4">Place an order</button>
+                </div>
             </div>
 
             <div class="clear"></div>
@@ -68,21 +66,10 @@
 <jsp:include page="commons/footer.jsp"/>
 
 <!-- Bootstrap CDN CSS file -->
-<script
-        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"
-></script>
-<script
-        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"
-></script>
-<script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"
-></script>
-<script src="https://unpkg.com/scrollreveal"></script>
+<script src="../libs/jquery/jquery-3.4.1.min.js"></script>
+<script src="../libs/popper/popper.min.js"></script>
+<script src="../libs/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+<script src="../libs/scrollreveal/scrollreveal.js"></script>
+<script src="../js/basket.js"></script>
 </body>
 </html>

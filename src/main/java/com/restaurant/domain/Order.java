@@ -1,7 +1,5 @@
 package com.restaurant.domain;
 
-import com.restaurant.entity.UserEntity;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,7 +10,7 @@ public class Order {
     private final User user;
     private final List<Dish> dishes;
 
-    public Order(Order.Builder builder) {
+    public Order(Builder builder) {
         this.id = builder.id;
         this.status = builder.status;
         this.createdAt = builder.createdAt;
@@ -40,7 +38,7 @@ public class Order {
         return dishes;
     }
 
-    public static Order.Builder builder() { return new Order.Builder(); }
+    public static Builder builder() { return new Builder(); }
 
     public static class Builder {
         private Long id;
@@ -52,27 +50,27 @@ public class Order {
         private Builder() {
         }
 
-        public Order.Builder withId(Long id) {
+        public Builder withId(Long id) {
             this.id = id;
             return this;
         }
 
-        public Order.Builder withStatus(OrderStatus status) {
+        public Builder withStatus(OrderStatus status) {
             this.status = status;
             return this;
         }
 
-        public Order.Builder withCreatedAt(LocalDate createdAt) {
+        public Builder withCreatedAt(LocalDate createdAt) {
             this.createdAt = createdAt;
             return this;
         }
 
-        public Order.Builder withUser(User user) {
+        public Builder withUser(User user) {
             this.user = user;
             return this;
         }
 
-        public Order.Builder witDishes(List<Dish> dishes) {
+        public Builder witDishes(List<Dish> dishes) {
             this.dishes = dishes;
             return this;
         }

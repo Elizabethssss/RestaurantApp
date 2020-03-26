@@ -11,12 +11,14 @@ public class LogoutCommand implements Command {
         final HttpSession session = request.getSession();
         session.invalidate();
 
+        request.setAttribute("responseType", "servlet");
         return "/login";
 //        return "/login?lang=en";
     }
 
     @Override
     public String execute(HttpServletRequest request) {
+        request.setAttribute("responseType", "jsp");
         return "pages/login.jsp";
     }
 }

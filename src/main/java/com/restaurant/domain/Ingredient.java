@@ -8,7 +8,7 @@ public class Ingredient {
     private final String img;
     private final List<Dish> dishes;
 
-    public Ingredient(Ingredient.Builder builder) {
+    public Ingredient(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.img = builder.img;
@@ -31,7 +31,7 @@ public class Ingredient {
         return dishes;
     }
 
-    public static Ingredient.Builder builder() { return new Ingredient.Builder(); }
+    public static Builder builder() { return new Builder(); }
 
     public static final class Builder {
         private Long id;
@@ -42,22 +42,22 @@ public class Ingredient {
         private Builder() {
         }
 
-        public Ingredient.Builder withId(Long id) {
+        public Builder withId(Long id) {
             this.id = id;
             return this;
         }
 
-        public Ingredient.Builder withName(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Ingredient.Builder withImg(String img) {
+        public Builder withImg(String img) {
             this.img = img;
             return this;
         }
 
-        public Ingredient.Builder withDishes(List<Dish> dishes) {
+        public Builder withDishes(List<Dish> dishes) {
             this.dishes = dishes;
             return this;
         }
