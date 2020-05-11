@@ -2,10 +2,10 @@ const basketItems = document.querySelectorAll('.basket-item button');
 basketItems.forEach(item => {
     item.addEventListener('click', e => {
         let basketTarget;
-        const dishAction = e.target.getAttribute('data-dish-action');
-        switch (dishAction) {
+        const action = e.target.getAttribute('data-action');
+        switch (action) {
             case 'remove':
-                if (confirm('Do you want to delete this dish?')) {
+                if (confirm('Do you want to delete this item?')) {
                     basketTarget = e.target.parentElement;
                 }
                 break;
@@ -13,19 +13,26 @@ basketItems.forEach(item => {
             case 'plus':
                 basketTarget = e.target.parentElement.parentElement.parentElement;
         }
-        const dishId = basketTarget ? basketTarget.getAttribute('data-dish-id') : 0;
-        const data = { dishId, dishAction };
+        const id = basketTarget ? basketTarget.getAttribute('data-id') : 0;
+        const type = basketTarget ? basketTarget.getAttribute('data-type') : null;
+        const data = { id, type, action };
 
-        if (dishId && basketTarget) {
-            console.log('send to server:', data)
-            if (dishAction !== 'remove') basketTarget.querySelector('.price-ex').classList.add('shake', 'animated');
+
+        if (id && basketTarget) {
+            console.log('send to server:', data);
+            if (action !== 'remove') basketTarget.querySelector('.price-ex').classList.add('shake', 'animated');
             $.ajax({
                 type: 'POST',
                 url: '/basket',
                 data: "data=" + JSON.stringify(data),
                 success: res => {
                     console.log('received from server:', res);
-                    updateBasketItem(dishAction, basketTarget, res)
+                    try {
+                        // res = JSON.parse(res);
+                        updateBasketItem(action, basketTarget, res)
+                    } catch (err) {
+                        console.error(err);
+                    }
                 },
                 error: error => {
                     console.error(error)
@@ -45,6 +52,10 @@ const updateBasketItem = (action, target, res) => {
                 clearTimeout(timeout);
                 timeout = null;
             }, 500);
+            // document.querySelector('#no-dishes').classList.remove('hide');
+        }
+        if (totalDishes === 0) {
+            document.querySelector('.total-price').classList.add('hide');
         }
     } else {
         target.querySelectorAll('.number-of-item').forEach(item => {
@@ -53,7 +64,7 @@ const updateBasketItem = (action, target, res) => {
         target.querySelectorAll('.price-of-items').forEach(item => {
             item.innerText = priceOfItems;
         });
-        target.querySelector('button[data-dish-action=minus').disabled = (numOfItems<=1);
+        target.querySelector('button[data-action=minus').disabled = (numOfItems<=1);
         target.querySelector('.price-ex').classList.remove('shake', 'animated');
     }
 

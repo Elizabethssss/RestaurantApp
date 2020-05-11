@@ -6,13 +6,13 @@ html {
 }
 
 body {
-    padding: 0%;
-    margin: 0%;
-    font-family: "Lato";
+    padding: 0;
+    margin: 0;
+    font-family: "Lato", sans-serif;
 }
 
 .navbar-brand {
-    font-family: "Pacifico";
+    font-family: "Pacifico", sans-serif;
     font-size: 35px;
     color: orange !important;
 }
@@ -21,7 +21,7 @@ body {
     font-size: 18px;
     margin: 15px;
     color: #000 !important;
-    font-family: "Roboto Condensed";
+    font-family: "Roboto Condensed", sans-serif;
 }
 
 .nav-link:hover {
@@ -78,18 +78,18 @@ body {
     vertical-align: middle;
     margin: 0;
     width: 45px;
-    border-radius: 0px !important;
+    border-radius: 0 !important;
     text-align: center;
 }
 .up_count {
     margin-left: -4px;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 .down_count {
     margin-right: -4px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .counter,
@@ -138,13 +138,9 @@ body {
 
 .section-5 h4 {
     margin-top: 15px;
-    font-family: "Montserrat";
+    font-family: "Montserrat", sans-serif;
     font-size: 20px;
     color: orange;
-}
-
-.section-5 h4 em {
-    color: red !important;
 }
 
 .bg {
@@ -226,3 +222,15 @@ button:focus,
 button:active {
      outline: none;
  }
+
+.hide {
+    display: none;
+}
+
+.no-dishes {
+    text-align: center;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    font-size: 19px;
+}
+

@@ -1,8 +1,9 @@
 package com.restaurant.service.validator;
 
+import java.util.Map;
+import java.util.ResourceBundle;
+
 public interface CreditCardValidator {
-    boolean validateCreditCardNumber(String number);
-    boolean validateNumberInput(String number);
-    boolean validateCVVInput(String cvv);
-    boolean validateDateInput(String month, String year);
+    Map<String, String> validate(String cardNumber, String expiredMonth, String expiredYear,
+                                 String cvv, ResourceBundle bundle);
 }

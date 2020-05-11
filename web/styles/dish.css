@@ -8,11 +8,11 @@ html {
 body {
     padding: 0;
     margin: 0;
-    font-family: "Lato";
+    font-family: "Lato", sans-serif;
 }
 
 .navbar-brand {
-    font-family: "Pacifico";
+    font-family: "Pacifico", sans-serif;
     font-size: 35px;
     color: orange !important;
 }
@@ -21,7 +21,7 @@ body {
     font-size: 18px;
     margin: 15px;
     color: #000 !important;
-    font-family: "Roboto Condensed";
+    font-family: "Roboto Condensed", sans-serif;
 }
 
 .nav-link:hover {
@@ -41,7 +41,7 @@ body {
 
 /* Breadcrumb */
 .breadcrumb-item{
-    font-family: "Roboto Condensed";
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 18px;
     margin: 8px 0 8px 8px;
 }
@@ -75,7 +75,7 @@ body {
 
 .section-4 .para-1 {
     color: #fff;
-    font-family: "Roboto Condensed";
+    font-family: "Roboto Condensed", sans-serif;
     margin-top: 4%;
     font-size: 23px;
 }
@@ -95,6 +95,10 @@ body {
     margin-top: 20px;
 }
 
+.carous h1 {
+    margin-bottom: 15px;
+}
+
 .carous h1 span {
     padding-bottom: 7px;
     border-bottom: 5px orange solid;
@@ -104,13 +108,9 @@ body {
 
 .section-5 h4 {
     margin-top: 15px;
-    font-family: "Montserrat";
+    font-family: "Montserrat", sans-serif;
     font-size: 20px;
     color: orange;
-}
-
-.section-5 h4 em {
-    color: red !important;
 }
 
 .ingredient-item {
@@ -128,4 +128,27 @@ body {
 
 .hide {
     display: none;
+}
+
+/* lunch.jsp */
+.lunch-page .carous h4 {
+    font-size: 18px;
+}
+.lunch-page .carous a {
+    color: black;
+}
+.lunch-page .btn-buy[disabled] {
+    cursor: default;
+    color: #666;
+    border-color: #666;
+}
+
+.dish-img {
+    max-width: 100%;
+    padding: 10px;
+}
+.dish-description h1,
+.dish-description p,
+.dish-description button {
+    margin: 20px;
 }

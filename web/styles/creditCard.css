@@ -1,0 +1,212 @@
+@import url("https://fonts.googleapis.com/css?family=Lato|Pacifico|Righteous|Roboto+Condensed|Ubuntu|Montserrat&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Lato", sans-serif;
+}
+
+.bg {
+    background: rgba(255, 164, 14, 0.16);
+}
+
+main {
+    height: 100%;
+}
+
+.clear {
+    margin: 113px;
+    background: rgba(255, 164, 14, 0.16);
+}
+
+.navbar-brand {
+    font-family: "Pacifico", sans-serif;
+    font-size: 35px;
+    color: orange !important;
+}
+
+.nav-link {
+    font-size: 18px;
+    margin: 15px;
+    color: #000 !important;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.nav-link:hover {
+    color: orange !important;
+}
+
+.active .nav-link {
+    color: orange !important;
+}
+
+.menu-right-btn {
+    padding: 13px 46px;
+    margin-right: 4%;
+    background-color: transparent;
+    transition: all 300ms ease-in;
+}
+
+/* CARD */
+
+.wrapper-card {
+    padding-top: 3%;
+    padding-bottom: 20%;
+}
+
+.sendmoney_wrapper-sender {
+    padding-left: 50px;
+    display: flex;
+    max-width: 505px;
+}
+
+.sendmoney_wrapper-frontSide {
+    background: #eee;
+    min-width: 400px;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 11.2px;
+    height: 240px;
+    box-sizing: border-box;
+    position: relative;
+    padding: 24px;
+    z-index: 1;
+}
+
+.sendmoney_frontSide-title {
+    margin: 0;
+    font-size: 20px;
+    font-family: Noto Sans, sans-serif;
+    color: #6c6c6c;
+}
+
+.sendmoney_frontSide-form {
+    margin-top: 17px;
+}
+
+.sendmoney_input {
+    position: relative;
+}
+
+.sendmoney_input .input-group {
+    width: 100%;
+}
+
+input:not([type="checkbox"]) {
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 17px;
+    border: 1px solid #cbcbcb;
+    line-height: 29px;
+    font-family: Noto Sans, sans-serif;
+    width: 100%;
+    color: #282828;
+    border-radius: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.sendmoney_frontSide-cardExpire {
+    display: flex;
+    margin-top: 7px;
+}
+
+.sendmoney_frontSide-cardExpire input {
+    width: 76px;
+    margin-right: 7px;
+}
+
+.sendmoney_wrapper-backSide {
+    background: #d6d6d6;
+    min-width: 360px;
+    max-width: 360px;
+    width: 100%;
+    border-radius: 11.2px;
+    height: 227px;
+    box-sizing: border-box;
+    position: relative;
+    right: 216px;
+}
+
+.sendmoney_magneticTape {
+    height: 52px;
+    background: #414141;
+    position: relative;
+    top: 24px;
+}
+
+.sendmoney_wrapper-cvv {
+    position: absolute;
+    top: 89px;
+    right: 45px;
+}
+
+.sendmoney_wrapper-cvv input {
+    max-width: 76px;
+}
+
+.sendmoney_cvv {
+    margin-top: 7px;
+    margin-bottom: 0;
+}
+
+.btn-buy {
+    width: 100px;
+    margin: 0 auto;
+}
+
+.btn-down{
+    padding-top: 37%;
+    text-align: right;
+}
+
+.btn-down h3{
+    width: 250px;
+}
+
+/* Footer */
+
+.section-5 h4 {
+    margin-top: 15px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    color: orange;
+}
+
+.payment-title {
+    padding-left: 100px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+
+.payment-title span {
+    padding-bottom: 7px;
+    border-bottom: 5px #ffa40e solid;
+}
+
+.error {
+    border: 2px solid red !important;
+}
+
+.errorMsg {
+    color: red;
+    margin-bottom: 0;
+    display: inline-block;
+    padding-right: 7px;
+}
+
+.error-cvv {
+    width: 80px;
+}

@@ -1,14 +1,13 @@
 package com.restaurant.domain;
 
-import java.time.LocalDate;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Lunch {
     private final Long id;
     private final String name;
     private final String description;
-    private final LocalDate timeFrom;
-    private final LocalDate timeTo;
     private final String img;
     private final LunchType lunchType;
     private final List<Dish> dishes;
@@ -17,8 +16,6 @@ public class Lunch {
         this.id = builder.id;
         this.name = builder.name;
         this.description = builder.description;
-        this.timeFrom = builder.timeFrom;
-        this.timeTo = builder.timeTo;
         this.img = builder.img;
         this.lunchType = builder.lunchType;
         this.dishes = builder.dishes;
@@ -36,12 +33,30 @@ public class Lunch {
         return description;
     }
 
-    public LocalDate getTimeFrom() {
-        return timeFrom;
+    public LocalTime getTimeFrom() {
+        return lunchType.getTimeFrom();
     }
 
-    public LocalDate getTimeTo() {
-        return timeTo;
+    public LocalTime getTimeTo() {
+        return lunchType.getTimeTo();
+    }
+
+    public int getPrice() {
+        int price = 0;
+        for (Dish dish : dishes) {
+            price += dish.getPriceInt();
+        }
+        return (int) (price * 0.9);
+    }
+
+    public String getWeight() {
+        String weight = "";
+        for (Dish dish : dishes) {
+            weight += dish.getWeight() + " ";
+        }
+        weight = weight.trim();
+        weight = weight.replaceAll(" ", " / ");
+        return weight;
     }
 
     public String getImg() {
@@ -62,8 +77,6 @@ public class Lunch {
         private Long id;
         private String name;
         private String description;
-        private LocalDate timeFrom;
-        private LocalDate timeTo;
         private String img;
         private LunchType lunchType;
         private List<Dish> dishes;
@@ -86,15 +99,6 @@ public class Lunch {
             return this;
         }
 
-        public Builder withTimeFrom(LocalDate timeFrom) {
-            this.timeFrom = timeFrom;
-            return this;
-        }
-
-        public Builder withTimeTo(LocalDate timeTo) {
-            this.timeTo = timeTo;
-            return this;
-        }
 
         public Builder withImg(String img) {
             this.img = img;

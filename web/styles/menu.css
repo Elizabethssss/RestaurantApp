@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Lato|Pacifico|Righteous|Roboto+Condensed|Ubuntu|Montserrat&display=swap");
 
 body {
-    padding: 0%;
-    margin: 0%;
-    font-family: "Lato";
+    padding: 0;
+    margin: 0;
+    font-family: "Lato", sans-serif;
 }
 
 .navbar-brand {
-    font-family: "Pacifico";
+    font-family: "Pacifico", sans-serif;
     font-size: 35px;
     color: orange !important;
 }
@@ -41,12 +41,12 @@ body {
 
 .SOUP {
     background-image: url("https://images.pexels.com/photos/5794/soup-leek-potato.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-    background-position-y: -200px;
+    background-position-y: -175px;
 }
 
 .MAIN_DISH {
     background-image: url("https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-    background-position-y: -375px;
+    background-position-y: -325px;
 }
 
 .DESSERT {
@@ -56,18 +56,18 @@ body {
 
 .DRINK {
     background-image: url("https://images.pexels.com/photos/1028637/pexels-photo-1028637.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-    background-position-y: -380px;
+    background-position-y: -250px;
     background-position-x: -200px;
 }
 
 .BREAKFAST {
     background-image: url("https://images.pexels.com/photos/2113556/pexels-photo-2113556.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-    background-position-y: -600px;
+    background-position-y: -400px;
 }
 
 .LUNCH {
     background-image: url("https://images.pexels.com/photos/5876/food-salad-healthy-vegetables.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-    background-position-y: -400px;
+    background-position-y: -300px;
 }
 
 .HOLIDAY {
@@ -78,7 +78,7 @@ body {
 .site-title,
 .site-desc {
     color: yellow;
-    font-family: "Righteous";
+    font-family: "Righteous", sans-serif;
     text-align: center;
 }
 
@@ -90,6 +90,7 @@ body {
 
 .site-desc {
     font-size: 16px;
+    margin: 10px;
 }
 
 .site-btn1 {
@@ -151,7 +152,7 @@ body {
 }
 
 .text-content h4 {
-    font-family: "Righteous";
+    font-family: "Righteous", sans-serif;
 }
 
 .single-content:hover .text-content {
@@ -162,13 +163,9 @@ body {
 
 .section-5 h4 {
     margin-top: 15px;
-    font-family: "Montserrat";
+    font-family: "Montserrat", sans-serif;
     font-size: 20px;
     color: orange;
-}
-
-.section-5 h4 em {
-    color: red !important;
 }
 
 .menu-list {
@@ -201,3 +198,10 @@ body {
     border-color: black;
 }
 
+.my-pagination p {
+    display: inline;
+    margin: 10px;
+}
+.my-pagination a {
+    margin: 10px 0 !important;
+}

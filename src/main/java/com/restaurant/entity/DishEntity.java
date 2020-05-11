@@ -1,5 +1,6 @@
 package com.restaurant.entity;
 
+import com.restaurant.domain.Dish;
 import com.restaurant.domain.DishType;
 
 import java.util.List;

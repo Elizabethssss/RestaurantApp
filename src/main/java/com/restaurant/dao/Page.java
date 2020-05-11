@@ -1,5 +1,9 @@
 package com.restaurant.dao;
 
+/**
+ * Class contains information about page
+ */
+
 public class Page {
     private final Integer pageNumber;
     private final Integer recordNumber;

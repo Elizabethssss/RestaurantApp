@@ -1,23 +1,26 @@
 package com.restaurant.entity;
 
+import com.restaurant.domain.Dish;
+import com.restaurant.domain.Lunch;
 import com.restaurant.domain.OrderStatus;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public class OrderEntity {
     private final Long id;
     private final OrderStatus status;
+    private final int cost;
     private final LocalDate createdAt;
     private final UserEntity userEntity;
-    private final List<DishEntity> dishEntities;
 
     public OrderEntity(Builder builder) {
         this.id = builder.id;
         this.status = builder.status;
+        this.cost = builder.cost;
         this.createdAt = builder.createdAt;
         this.userEntity = builder.userEntity;
-        this.dishEntities = builder.dishEntities;
     }
 
     public Long getId() {
@@ -28,6 +31,10 @@ public class OrderEntity {
         return status;
     }
 
+    public int getCost() {
+        return cost;
+    }
+
     public LocalDate getCreatedAt() {
         return createdAt;
     }
@@ -36,18 +43,14 @@ public class OrderEntity {
         return userEntity;
     }
 
-    public List<DishEntity> getDishEntities() {
-        return dishEntities;
-    }
-
     public static Builder builder() { return new Builder(); }
 
     public static class Builder {
         private Long id;
         private OrderStatus status;
+        private int cost;
         private LocalDate createdAt;
         private UserEntity userEntity;
-        private List<DishEntity> dishEntities;
 
         private Builder() {
         }
@@ -62,6 +65,11 @@ public class OrderEntity {
             return this;
         }
 
+        public Builder withCost(int cost) {
+            this.cost = cost;
+            return this;
+        }
+
         public Builder withCreatedAt(LocalDate createdAt) {
             this.createdAt = createdAt;
             return this;
@@ -69,11 +77,6 @@ public class OrderEntity {
 
         public Builder withUserEntity(UserEntity userEntity) {
             this.userEntity = userEntity;
-            return this;
-        }
-
-        public Builder withDishEntities(List<DishEntity> dishEntities) {
-            this.dishEntities = dishEntities;
             return this;
         }
 

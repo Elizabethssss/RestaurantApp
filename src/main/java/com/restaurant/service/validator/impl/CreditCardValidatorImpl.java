@@ -4,6 +4,9 @@ import com.restaurant.service.validator.CreditCardValidator;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class CreditCardValidatorImpl implements CreditCardValidator {
     private static final String CARD_NUMBER_INPUT = "[0-9]{13,16}";
@@ -12,22 +15,43 @@ public class CreditCardValidatorImpl implements CreditCardValidator {
     private static final String CARD_YEAR_INPUT = "([2-3][0-9])";
 
     @Override
-    public boolean validateNumberInput(String number) {
-        return number.matches(CARD_NUMBER_INPUT);
+    public Map<String, String> validate(String cardNumber, String expiredMonth, String expiredYear,
+                                        String cvv, ResourceBundle bundle) {
+        final String emptyMsg = bundle.getString("empty.field");
+        Map<String, String> errorMessages = new HashMap<>();
+        if (cardNumber.equals("")) {
+            errorMessages.put("cardNumberError", emptyMsg);
+        }
+        else if(!cardNumber.matches(CARD_NUMBER_INPUT)) {
+            errorMessages.put("cardNumberError", bundle.getString("wrong.input"));
+        }
+        else if(!validateCreditCardNumber(cardNumber)) {
+            errorMessages.put("cardNumberError", bundle.getString("wrong.card.number"));
+        }
+        if(expiredMonth.equals("") || expiredYear.equals("")) {
+            errorMessages.put("dateError", emptyMsg);
+        }
+        else if(!validateDateInput(expiredMonth, expiredYear)) {
+            errorMessages.put("dateError", bundle.getString("wrong.date"));
+        }
+        if (cvv.equals("")) {
+            errorMessages.put("cvvError", emptyMsg);
+        }
+        else if (!cvv.matches(CARD_CVV_INPUT)) {
+            errorMessages.put("cvvError", bundle.getString("wrong.input"));
+        }
+        return errorMessages;
     }
 
-    @Override
-    public boolean validateCVVInput(String cvv) {
-        return cvv.matches(CARD_CVV_INPUT);
-    }
-
-    @Override
     public boolean validateDateInput(String month, String year) {
-        Calendar calendar = Calendar.getInstance();
-        Date date = calendar.getTime();
-        calendar.set(Integer.parseInt(year) + 2000, Integer.parseInt(month) - 1, 1);
-        Date myDate = calendar.getTime();
-        return validateMonthInput(month) && validateYearInput(year) && date.compareTo(myDate) < 0;
+        if (validateMonthInput(month) && validateYearInput(year)) {
+            Calendar calendar = Calendar.getInstance();
+            Date date = calendar.getTime();
+            calendar.set(Integer.parseInt(year) + 2000, Integer.parseInt(month) - 1, 1);
+            Date myDate = calendar.getTime();
+            return date.compareTo(myDate) < 0;
+        }
+        return false;
     }
 
     public boolean validateMonthInput(String month) {
@@ -38,7 +62,6 @@ public class CreditCardValidatorImpl implements CreditCardValidator {
         return year.matches(CARD_YEAR_INPUT);
     }
 
-    @Override
     public boolean validateCreditCardNumber(String number) {
         int[] ints = new int[number.length()];
         for (int i = 0; i < number.length(); i++) {

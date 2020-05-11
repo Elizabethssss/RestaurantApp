@@ -25,42 +25,72 @@
 <main>
     <div class="section-1 bg">
         <div class="container">
-            <h1 class="basket-title"><span>Your dishes:</span></h1>
+            <h1 class="basket-title"><span>${requestScope.bundle.getString("your.dishes")}:</span></h1>
+            <c:if test="${requestScope.dishes.isEmpty() && requestScope.lunchIntegerMap.isEmpty()}">
+                <div class="no-dishes">${requestScope.bundle.getString("no.dishes")}</div>
+            </c:if>
+
             <div class="row">
-                <c:forEach var="dish" items="${requestScope.dishes}">
-                    <div class="basket-item fade-out col-10" data-dish-id="${dish.key.id}">
-                        <button class="close" data-dish-action="remove">x</button>
+                <c:forEach var="dish" items="${dishes}">
+                    <div class="basket-item fade-out col-10" data-type="dish" data-id="${dish.key.id}">
+                        <button class="close" data-action="remove">x</button>
                         <div class="basket-item-img">
                             <img src="../img/dishes-s/${dish.key.img}" alt="" />
                         </div>
                         <div>
                             <h2>${dish.key.name}</h2>
-                            <p>
-                                ${dish.key.about}
-                            </p>
+                            <p>${dish.key.about}</p>
                             <div class="number">
-                                <button class="down_count btn p-m-btn" title="Down" data-dish-action="minus"
-                                        ${dish.value == 1 ? 'disabled':''}>–</button>
+                                <button class="down_count btn p-m-btn" title="Down" data-action="minus"
+                                    ${dish.value == 1 ? 'disabled':''}>–</button>
                                 <h3 class="counter number-of-item">${dish.value}</h3>
-                                <button class="up_count btn p-m-btn" title="Up" data-dish-action="plus">+</button>
+                                <button class="up_count btn p-m-btn" title="Up" data-action="plus">+</button>
                             </div>
                             <p class="mt-3 price">
-                            Price: <span class="number-of-item">4</span> <span class="price-ex" style="display:inline-block">x</span> <span>${dish.key.getPriceInt()}</span> UAH = <span class="price-of-items">567</span> UAH
+                                ${requestScope.bundle.getString("price")}: <span class="number-of-item">${dish.value}</span>
+                                    <span class="price-ex">x</span><span>${dish.key.getPriceInt()}</span>
+                                        ${requestScope.bundle.getString("uah")} = <span class="price-of-items">
+                                        ${dish.value * dish.key.getPriceInt()}</span> ${requestScope.bundle.getString("uah")}
+                            </p>
+                        </div>
+                    </div>
+                </c:forEach>
+                <c:forEach var="lunch" items="${requestScope.lunchIntegerMap}">
+                    <div class="basket-item fade-out col-10" data-type="lunch" data-id="${lunch.key.id}">
+                        <button class="close" data-action="remove">x</button>
+                        <div class="basket-item-img">
+                            <img src="../img/lunches-s/${lunch.key.img}" alt="" />
+                        </div>
+                        <div>
+                            <h2>${lunch.key.name}</h2>
+                            <p>${lunch.key.description}</p>
+                            <div class="number">
+                                <button class="down_count btn p-m-btn" title="Down" data-action="minus"
+                                    ${lunch.value == 1 ? 'disabled':''}>–</button>
+                                <h3 class="counter number-of-item">${lunch.value}</h3>
+                                <button class="up_count btn p-m-btn" title="Up" data-action="plus">+</button>
+                            </div>
+                            <p class="mt-3 price">
+                                ${requestScope.bundle.getString("price")}: <span class="number-of-item">${lunch.value}</span>
+                                    <span class="price-ex">x</span><span>${lunch.key.price}</span>
+                                        ${requestScope.bundle.getString("uah")} = <span class="price-of-items">
+                                        ${lunch.value * lunch.key.price}</span> ${requestScope.bundle.getString("uah")}
                             </p>
                         </div>
                     </div>
                 </c:forEach>
             </div>
-            <div class="row">
-                <div class="col-10 total-price mt-4 text-right">
-                    <h2 class="total">Total: <span id="totalPrice">${requestScope.totalPrice}</span> UAH</h2>
-                    <button class="btn btn-dark mb-4">Place an order</button>
+                <div class="row ${(requestScope.dishes.isEmpty() && requestScope.lunchIntegerMap.isEmpty()) ? 'hide':''}">
+                    <div class="col-10 total-price mt-4 text-right">
+                        <h2 class="total">${requestScope.bundle.getString("total")}: <span id="totalPrice">${requestScope.totalPrice}</span>
+                            ${requestScope.bundle.getString("uah")}</h2>
+                        <a href="placeOrder" class="btn btn-dark mb-4">${requestScope.bundle.getString("place.order")}</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="clear"></div>
+<%--            <div class="clear"></div>--%>
 
-    </div>
+        </div>
     </div>
 </main>
 <jsp:include page="commons/footer.jsp"/>

@@ -3,37 +3,38 @@ package com.restaurant.command.user;
 import com.restaurant.command.Command;
 import com.restaurant.domain.Role;
 import com.restaurant.domain.User;
-import com.restaurant.service.OrderService;
 import com.restaurant.service.UserService;
+import com.restaurant.service.util.Localization;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
+
+import static com.restaurant.command.util.Util.*;
 
 public class SignUpCommand implements Command {
     private final UserService userService;
-    private final OrderService orderService;
-//    private final Localization localization;
+    private final Localization localization;
 
-    public SignUpCommand(UserService userService, OrderService orderService) {
-//    public SignUpCommand(UserService userService, Localization localization) {
+    public SignUpCommand(UserService userService, Localization localization) {
         this.userService = userService;
-        this.orderService = orderService;
-//        this.localization = localization;
+        this.localization = localization;
     }
 
     @Override
     public String show(HttpServletRequest request) {
-        //request.setAttribute("bundle", localization.getLocalizationBundle(request));
+        request.setAttribute("bundle", localization.getLocalizationBundle(request));
         request.setAttribute("rightSide", true);
-        request.setAttribute("responseType", "jsp");
+        request.setAttribute(RESPONSE_TYPE, JSP);
         return "pages/authorization.jsp";
     }
 
     @Override
     public String execute(HttpServletRequest request) {
+        final HttpSession session = request.getSession();
         final String username = request.getParameter("username").trim();
         final String email = request.getParameter("email").trim();
         final String password1 = request.getParameter("password1");
@@ -46,23 +47,22 @@ public class SignUpCommand implements Command {
                 .withOrders(new ArrayList<>())
                 .build();
 
+        final ResourceBundle bundle = localization.getLocalizationBundle(request);
+        request.setAttribute("bundle", bundle);
+
         Map<String, String> errorsMessages = new HashMap<>();
         if(!password1.equals(password2)) {
-            errorsMessages.put("passwordError", "Passwords are not equal!");
+            errorsMessages.put("passwordError", bundle.getString("not.equal.passwords"));
         } else {
-            errorsMessages.putAll(userService.register(user));
+            errorsMessages.putAll(userService.register(user, bundle));
         }
         if(errorsMessages.isEmpty()) {
-            final HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            session.setAttribute("inBasket", 0);
-
-            request.setAttribute("responseType", "servlet");
-            return "/index";
+            request.setAttribute(RESPONSE_TYPE, SERVLET);
+            return "/login?lang=" + session.getAttribute("locale");
         }
         else {
             setErrorAttributes(request, username, email, errorsMessages);
-            request.setAttribute("responseType", "jsp");
+            request.setAttribute(RESPONSE_TYPE, JSP);
             return "pages/authorization.jsp";
         }
     }
@@ -74,5 +74,4 @@ public class SignUpCommand implements Command {
         request.setAttribute("errorsMessages", errorsMessages);
         request.setAttribute("rightSide", true);
     }
-
 }

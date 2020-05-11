@@ -5,30 +5,32 @@ import com.restaurant.domain.Order;
 import com.restaurant.domain.User;
 import com.restaurant.service.OrderService;
 import com.restaurant.service.UserService;
+import com.restaurant.service.util.Localization;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
+
+import static com.restaurant.command.util.Util.*;
 
 public class LoginCommand implements Command {
     private final UserService userService;
     private final OrderService orderService;
-//    private final Localization localization;
+    private final Localization localization;
 
-    public LoginCommand(UserService userService, OrderService orderService) {
-//    public LoginCommand(UserService userService, Localization localization) {
+    public LoginCommand(UserService userService, OrderService orderService, Localization localization) {
         this.userService = userService;
         this.orderService = orderService;
-//        this.localization = localization;
+        this.localization = localization;
     }
 
     @Override
     public String show(HttpServletRequest request) {
-//        request.setAttribute("bundle", localization.getLocalizationBundle(request));
-
-        request.setAttribute("responseType", "jsp");
+        request.setAttribute("bundle", localization.getLocalizationBundle(request));
+        request.setAttribute(RESPONSE_TYPE, JSP);
         return "pages/authorization.jsp";
     }
 
@@ -37,35 +39,40 @@ public class LoginCommand implements Command {
         final String email = request.getParameter("email").trim();
         final String password = DigestUtils.md5Hex(request.getParameter("password"));
 
-//        request.setAttribute("bundle", localization.getLocalizationBundle(request));
+        final ResourceBundle bundle = localization.getLocalizationBundle(request);
+        request.setAttribute("bundle", bundle);
+
         Optional<User> checkUser = userService.login(email, password);
 
         if (!checkUser.isPresent()) {
-            request.setAttribute("email", email);
-            request.setAttribute("error", true);
-            request.setAttribute("errorMessage", "Wrong email or password!");
-            request.setAttribute("responseType", "jsp");
+            setErrorAttributes(request, email, bundle);
+            request.setAttribute(RESPONSE_TYPE, JSP);
             return "pages/authorization.jsp";
         } else {
-            setUserToSession(request, checkUser);
-            request.setAttribute("responseType", "servlet");
-            return "/index";
-//            return "/index?lang=" + session.getAttribute("locale");
+            final HttpSession session = request.getSession();
+            setUserToSession(session, checkUser.get());
+            request.setAttribute(RESPONSE_TYPE, SERVLET);
+            return "/index?lang=" + session.getAttribute("locale");
         }
     }
 
-    private void setUserToSession(HttpServletRequest request, Optional<User> checkUser) {
-        final HttpSession session = request.getSession();
-        final Long userId = checkUser.get().getId();
+    private void setUserToSession(HttpSession session, User checkUser) {
+        final Long userId = checkUser.getId();
         final List<Order> orders = orderService.getOrdersByUserId(userId);
         User user = User.builder()
                 .withId(userId)
-                .withUsername(checkUser.get().getUsername())
-                .withEmail(checkUser.get().getEmail())
-                .withPassword(checkUser.get().getPassword())
-                .withRole(checkUser.get().getRole())
+                .withUsername(checkUser.getUsername())
+                .withEmail(checkUser.getEmail())
+                .withPassword(checkUser.getPassword())
+                .withRole(checkUser.getRole())
                 .withOrders(orders)
                 .build();
         session.setAttribute("user", user);
+    }
+
+    private void setErrorAttributes(HttpServletRequest request, String email, ResourceBundle bundle) {
+        request.setAttribute("email", email);
+        request.setAttribute("error", true);
+        request.setAttribute("errorMessage", bundle.getString("wrong.login"));
     }
 }

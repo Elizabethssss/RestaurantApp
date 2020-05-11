@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * An implementation of {@link ConnectionPool}
+ */
 public class HikariCPManager implements ConnectionPool {
     private static final Logger LOGGER = Logger.getLogger(HikariCPManager.class);
 
@@ -21,6 +24,12 @@ public class HikariCPManager implements ConnectionPool {
 
     private static HikariConfig config = new HikariConfig();
     private HikariDataSource ds;
+
+    /**
+     * Use to get a new manager from resource file.
+     *
+     * @param filename path to resource file
+     */
 
     public HikariCPManager(String filename) {
         ResourceBundle resource = ResourceBundle.getBundle(filename);

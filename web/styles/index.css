@@ -6,6 +6,11 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+h1,
+.site-desc {
+  margin: 15px;
+}
+
 .site-content {
   background-image: url("https://images.pexels.com/photos/543733/pexels-photo-543733.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   background-attachment: fixed;
@@ -70,9 +75,9 @@ body {
   margin-bottom: 8%;
 }
 
-.card {
-  width: 20rem;
-}
+/*.card {*/
+/*  width: 20rem;*/
+/*}*/
 
 /* Section-2 */
 
@@ -129,6 +134,10 @@ body {
   margin-bottom: 10%;
 }
 
+.section-4 img {
+  max-width: 100%;
+}
+
 .section-4 a {
   color: #ffa81a;
   font-size: 40px;
@@ -147,10 +156,6 @@ body {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   color: orange;
-}
-
-.section-5 h4 em {
-  color: red !important;
 }
 
 @media sreen and (max-width: 768px) {
@@ -200,3 +205,10 @@ body {
   background: linear-gradient(to top, rgba(43,43,43,0) 0%, rgba(43,43,43,0.7) 100%);
 }
 
+.cards > div {
+  margin: 10px auto;
+  width: auto;
+}
+.cards > div img {
+  /*max-width: 100%;*/
+}

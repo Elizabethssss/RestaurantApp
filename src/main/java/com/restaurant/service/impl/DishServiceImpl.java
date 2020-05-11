@@ -38,6 +38,12 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
+    public List<Dish> getDishesByLunchId(Long lunchId) {
+        return dishDao.getDishesByLunchId(lunchId).stream()
+                .map(dishMapper::mapEntityToDomain).collect(Collectors.toList());
+    }
+
+    @Override
     public List<Dish> getDishesByType(String dishType, Page page) {
         return dishDao.findAll(dishType, page).stream()
                 .map(dishMapper::mapEntityToDomain).collect(Collectors.toList());

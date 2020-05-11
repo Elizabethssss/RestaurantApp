@@ -10,6 +10,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of Ingredient DAO
+ */
+
 public class IngredientDaoImpl extends AbstractDao<IngredientEntity> implements IngredientDao {
     public static final String SAVE_QUERY = "INSERT INTO ingredients VALUES (DEFAULT, ?, ?);";
     public static final String UPDATE_QUERY = "UPDATE ingredients SET name = ?, img = ? WHERE id= ?;";

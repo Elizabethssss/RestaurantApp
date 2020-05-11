@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
-@WebServlet(name = "FrontController", urlPatterns = {"/login", "/signUp", "/logout", "/index", "/menu", "/profile",
-        "/dish", "/buy", "/basket"})
+@WebServlet(name = "FrontController", urlPatterns = {"/login", "/signUp", "/logout", "/index", "/menu",
+        "/myOrders", "/dish", "/lunch", "/basket", "/placeOrder", "/creditCard", "/admin"})
 public class FrontController extends HttpServlet {
     private final Map<String, Command> commands;
 
@@ -42,12 +43,28 @@ public class FrontController extends HttpServlet {
         processCommand(request, response, page);
     }
 
-    private void processCommand(HttpServletRequest request, HttpServletResponse response, String page) throws IOException, ServletException {
-        if (!page.contains(".jsp")) {
-            response.sendRedirect(request.getContextPath() + page);
-        } else {
-            request.getRequestDispatcher(page).forward(request, response);
+    private void processCommand(HttpServletRequest request, HttpServletResponse response, String answer) throws IOException, ServletException {
+        if (request.getAttribute("responseType").equals("servlet")) {
+            response.sendRedirect(request.getContextPath() + answer);
         }
+        else if(request.getAttribute("responseType").equals("json")) {
+            PrintWriter out = response.getWriter();
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out.print(answer);
+            out.flush();
+        }
+        else if(request.getAttribute("responseType").equals("jsp")) {
+            request.getRequestDispatcher(answer).forward(request, response);
+        }
+        else {
+            request.getRequestDispatcher(answer).forward(request, response);
+        }
+//        if (!answer.contains(".jsp")) {
+//            response.sendRedirect(request.getContextPath() + answer);
+//        } else {
+//            request.getRequestDispatcher(answer).forward(request, response);
+//        }
     }
 
     private Command getCommand(HttpServletRequest request) {

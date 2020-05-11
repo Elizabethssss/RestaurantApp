@@ -9,16 +9,17 @@
     margin: 15px;
     color: #000 !important;
     font-family: "Roboto Condensed", sans-serif;
+    /*border-bottom: 2px solid transparent;*/
 }
 
 .nav-link:hover {
     color: orange !important;
 }
 
-.active .nav-link {
+.active.nav-link {
     color: orange !important;
+    /*border-bottom: 2px solid #aaaaaa;*/
 }
-
 
 .menu-right-btn {
     padding: 13px 46px;
@@ -26,4 +27,19 @@
     transition: all 300ms ease-in;
     background-color: #ffa40e;
     border-color: #ffa40e;
+}
+
+.btn-drop {
+    color: #212529;
+    background: #fff0d8;
+}
+
+#totalDishes {
+    font-weight: bold;
+}
+
+#navbarMenu em {
+    color: #ffa40e;
+    font-size: 30px;
+    padding-top: 5px;
 }

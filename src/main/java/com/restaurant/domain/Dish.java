@@ -14,7 +14,7 @@ public class Dish {
     private final List<Lunch> lunches;
     private final List<Ingredient> ingredients;
 
-    public Dish(Dish.Builder builder) {
+    public Dish(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.about = builder.about;
@@ -47,6 +47,10 @@ public class Dish {
         return price;
     }
 
+    public int getPriceInt() {
+        return (int) price;
+    }
+
     public int getWeight() {
         return weight;
     }
@@ -67,7 +71,7 @@ public class Dish {
         return ingredients;
     }
 
-    public static Dish.Builder builder() { return new Dish.Builder(); }
+    public static Builder builder() { return new Builder(); }
 
     public static final class Builder {
         private Long id;
@@ -84,52 +88,52 @@ public class Dish {
         private Builder() {
         }
 
-        public Dish.Builder withId(Long id) {
+        public Builder withId(Long id) {
             this.id = id;
             return this;
         }
 
-        public Dish.Builder withName(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Dish.Builder withAbout(String about) {
+        public Builder withAbout(String about) {
             this.about = about;
             return this;
         }
 
-        public Dish.Builder withDishType(DishType dishType) {
+        public Builder withDishType(DishType dishType) {
             this.dishType = dishType;
             return this;
         }
 
-        public Dish.Builder withPrice(double price) {
+        public Builder withPrice(double price) {
             this.price = price;
             return this;
         }
 
-        public Dish.Builder withWeight(int weight) {
+        public Builder withWeight(int weight) {
             this.weight = weight;
             return this;
         }
 
-        public Dish.Builder withImage(String img) {
+        public Builder withImage(String img) {
             this.img = img;
             return this;
         }
 
-        public Dish.Builder withOrders(List<Order> orders) {
+        public Builder withOrders(List<Order> orders) {
             this.orders = orders;
             return this;
         }
 
-        public Dish.Builder withLunches(List<Lunch> lunches) {
+        public Builder withLunches(List<Lunch> lunches) {
             this.lunches = lunches;
             return this;
         }
 
-        public Dish.Builder withIngredients(List<Ingredient> ingredients) {
+        public Builder withIngredients(List<Ingredient> ingredients) {
             this.ingredients = ingredients;
             return this;
         }

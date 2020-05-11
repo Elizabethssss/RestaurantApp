@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/index", "/menu", "/dish", "/"})
+@WebFilter(urlPatterns = {"/index", "/menu", "/dish", "/lunch", "/basket", "/myOrders", "/admin", "/"})
 public class AuthorizationFilter implements Filter {
 
     @Override
@@ -21,8 +21,7 @@ public class AuthorizationFilter implements Filter {
         HttpSession session = request.getSession();
         boolean isUserInSession = session != null && session.getAttribute("user") != null;
         if(!isUserInSession) {
-            response.sendRedirect(request.getContextPath() + "/login");
-//            response.sendRedirect(request.getContextPath() + "/login?lang=en");
+            response.sendRedirect(request.getContextPath() + "/login?lang=en");
         } else {
             filterChain.doFilter(request, response);
         }

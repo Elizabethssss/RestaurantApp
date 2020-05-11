@@ -10,7 +10,7 @@ public class User {
     private final Role role;
     private final List<Order> orders;
 
-    public User(User.Builder builder) {
+    public User(Builder builder) {
         this.id = builder.id;
         this.username = builder.username;
         this.email = builder.email;
@@ -43,7 +43,7 @@ public class User {
         return orders;
     }
 
-    public static User.Builder builder() { return new User.Builder(); }
+    public static Builder builder() { return new Builder(); }
 
     public static class Builder {
         private Long id;
@@ -56,32 +56,32 @@ public class User {
         private Builder() {
         }
 
-        public User.Builder withId(Long id) {
+        public Builder withId(Long id) {
             this.id = id;
             return this;
         }
 
-        public User.Builder withUsername(String username) {
+        public Builder withUsername(String username) {
             this.username = username;
             return this;
         }
 
-        public User.Builder withEmail(String email) {
+        public Builder withEmail(String email) {
             this.email = email;
             return this;
         }
 
-        public User.Builder withPassword(String password) {
+        public Builder withPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public User.Builder withRole(Role role) {
+        public Builder withRole(Role role) {
             this.role = role;
             return this;
         }
 
-        public User.Builder withOrders(List<Order> orders) {
+        public Builder withOrders(List<Order> orders) {
             this.orders = orders;
             return this;
         }

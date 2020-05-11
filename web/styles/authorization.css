@@ -265,4 +265,11 @@ footer p {
     margin-top: 14px;
 }
 
+.locale{
+    display: inline-block;
+    margin-bottom: 15px;
+}
 
+.locale a{
+    text-decoration: underline ;
+}

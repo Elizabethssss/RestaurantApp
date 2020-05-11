@@ -2,20 +2,25 @@ package com.restaurant.domain;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public class Order {
     private final Long id;
     private final OrderStatus status;
+    private final int cost;
     private final LocalDate createdAt;
     private final User user;
-    private final List<Dish> dishes;
+    private final Map<Dish, Integer> dishes;
+    private final Map<Lunch, Integer> lunches;
 
     public Order(Builder builder) {
         this.id = builder.id;
         this.status = builder.status;
+        this.cost = builder.cost;
         this.createdAt = builder.createdAt;
         this.user = builder.user;
         this.dishes = builder.dishes;
+        this.lunches = builder.lunches;
     }
 
     public Long getId() {
@@ -26,6 +31,10 @@ public class Order {
         return status;
     }
 
+    public int getCost() {
+        return cost;
+    }
+
     public LocalDate getCreatedAt() {
         return createdAt;
     }
@@ -34,8 +43,12 @@ public class Order {
         return user;
     }
 
-    public List<Dish> getDishes() {
+    public Map<Dish, Integer> getDishes() {
         return dishes;
+    }
+
+    public Map<Lunch, Integer> getLunches() {
+        return lunches;
     }
 
     public static Builder builder() { return new Builder(); }
@@ -43,9 +56,11 @@ public class Order {
     public static class Builder {
         private Long id;
         private OrderStatus status;
+        private int cost;
         private LocalDate createdAt;
         private User user;
-        private List<Dish> dishes;
+        private Map<Dish, Integer> dishes;
+        private Map<Lunch, Integer> lunches;
 
         private Builder() {
         }
@@ -60,6 +75,11 @@ public class Order {
             return this;
         }
 
+        public Builder withCost(int cost) {
+            this.cost = cost;
+            return this;
+        }
+
         public Builder withCreatedAt(LocalDate createdAt) {
             this.createdAt = createdAt;
             return this;
@@ -70,8 +90,13 @@ public class Order {
             return this;
         }
 
-        public Builder witDishes(List<Dish> dishes) {
+        public Builder withDishes(Map<Dish, Integer> dishes) {
             this.dishes = dishes;
+            return this;
+        }
+
+        public Builder withLunches(Map<Lunch, Integer> lunches) {
+            this.lunches = lunches;
             return this;
         }
 

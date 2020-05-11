@@ -14,15 +14,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * DAO that provides a base functionality for all DAO.
+ */
+
 public abstract class AbstractDao<T> implements GenericDao<T> {
     protected static final Logger LOGGER = Logger.getLogger(AbstractDao.class);
     protected static final String ERROR_MESSAGE = "Can't process sql '%s'; Error: %s";
 
     private final HikariCPManager connector;
 
+    /**
+     * Creates new DAO.
+     *
+     * @param connector connection holder
+     */
+
     public AbstractDao(HikariCPManager connector) {
         this.connector = connector;
     }
+
+    /**
+     * Use to get connection from connection holder
+     *
+     * @return connection from connection holder
+     */
 
     public HikariCPManager getConnector() {
         return connector;
@@ -107,6 +123,50 @@ public abstract class AbstractDao<T> implements GenericDao<T> {
         }
     }
 
+    protected <S, P> Optional<T> findByTwoParams(S param1, P param2, String query) {
+        try(Connection connection = connector.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setObject(1, param1);
+            ps.setObject(2, param2);
+            try(final ResultSet rs = ps.executeQuery()) {
+                if(rs.next()) {
+                    return Optional.ofNullable(parseResultSet(rs));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(String.format(ERROR_MESSAGE, query, e));
+            throw new DataBaseException("Error in getting by two parameters from db", e);
+        }
+        return Optional.empty();
+    }
+
+    protected <S, P> void executeDataUpdateWithTwoParams(S param1, P param2, String query) {
+        try(Connection connection = connector.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setObject(1, param1);
+            ps.setObject(2, param2);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.error(String.format(ERROR_MESSAGE, query, e));
+            throw new DataBaseException("Error in changing data in db", e);
+        }
+    }
+
+    protected <S, P> void executeDataUpdateSeveralTimesWithTwoParams(S param1, P param2, int quantity, String query) {
+        try(Connection connection = connector.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setObject(1, param1);
+            ps.setObject(2, param2);
+            while (quantity != 0) {
+                ps.executeUpdate();
+                quantity--;
+            }
+        } catch (SQLException e) {
+            LOGGER.error(String.format(ERROR_MESSAGE, query, e));
+            throw new DataBaseException("Error in changing data several times in db", e);
+        }
+    }
+    
     protected List<T> findAll(Object obj, Page page, String query) {
         try(Connection connection = connector.getConnection();
             PreparedStatement ps = connection.prepareStatement(query)) {
@@ -143,7 +203,7 @@ public abstract class AbstractDao<T> implements GenericDao<T> {
         }
     }
 
-
+    
     protected abstract T parseResultSet(ResultSet resultSet) throws SQLException;
 
     protected abstract void prepareStatementForInsert(PreparedStatement preparedStatement, T object) throws SQLException;

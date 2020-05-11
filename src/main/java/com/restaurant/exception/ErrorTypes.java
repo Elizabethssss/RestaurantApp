@@ -3,7 +3,6 @@ package com.restaurant.exception;
 public enum ErrorTypes {
     EMAIL_INPUT_ERROR(""),
     NOT_EQUAL_PASSWORDS("not_equal_passwords"),
-    //todo: pereimenovat'
     OBJECT_IS_NULL("object_is_null");
 
     private String errorMessage;

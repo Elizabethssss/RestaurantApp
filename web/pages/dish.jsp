@@ -29,34 +29,38 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="menu?type=${requestScope.dish.dishType}&page=1">Menu</a>
+                <a href="menu?type=${requestScope.dish.dishType}&page=1">${requestScope.bundle.getString("menu")}</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">${requestScope.dish.name}</li>
         </ol>
     </nav>
-    <div class="alert alert-success ${requestScope.message == null ? 'hide':''}" role="alert" style="text-align: center">
+    <div class="alert alert-success text-center ${requestScope.message == null ? 'hide':''}" role="alert">
         ${requestScope.message}
     </div>
-    <form method="post" action="buy?id=${requestScope.dish.id}">
+    <form method="post" action="dish?id=${requestScope.dish.id}&lang=${sessionScope.locale}">
         <div class="section-4 bg-dark">
             <div class="container p-0">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="../img/dishes/${requestScope.dish.img}" alt="${requestScope.dish.name}" width="530"/>
+                        <img class="dish-img" src="../img/dishes/${requestScope.dish.img}" alt="${requestScope.dish.name}" width="530"/>
                     </div>
-                    <div class="col-md-6">
+                    <div class="dish-description col-md-6">
                         <h1 class="text-white">${requestScope.dish.name}</h1>
                         <p class="para-1">${requestScope.dish.about}</p>
-                        <p class="weight">Weight: ${requestScope.dish.weight} g</p>
-                        <p class="price">Price: ${requestScope.dish.getPriceInt()} UAH</p>
-                        <button type="submit" class="btn px-4 py-1 btn-outline-warning">Buy</button>
+                        <p class="weight">${requestScope.bundle.getString("weight")}: ${requestScope.dish.weight}
+                            ${requestScope.bundle.getString("weight.g")}</p>
+                        <p class="price">${requestScope.bundle.getString("price")}: ${requestScope.dish.getPriceInt()}
+                            ${requestScope.bundle.getString("uah")}</p>
+                        <button type="submit" class="btn px-4 py-1 btn-outline-warning">
+                            ${requestScope.bundle.getString("buy")}
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
         <div class="container carous">
-            <h1><span>Ingredients:</span></h1>
+            <h1><span>${requestScope.bundle.getString("ingredients")}:</span></h1>
             <div class="owl-carousel owl-theme">
                 <c:forEach var="ingredient" items="${ingredients}">
                     <div class="item ingredient-item">
@@ -73,17 +77,11 @@
 <jsp:include page="commons/footer.jsp"/>
 
 <!-- Bootstrap CDN CSS file -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+<script src="../libs/jquery/jquery-3.4.1.min.js"></script>
+<script src="../libs/popper/popper.min.js"></script>
+<script src="../libs/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+<script src="../libs/scrollreveal/scrollreveal.js"></script>
 <script src="../libs/owlcarousel/dist/owl.carousel.min.js"></script>
-<script src="https://unpkg.com/scrollreveal"></script>
 <script>
     window.sr = ScrollReveal({ duration: 1500 });
     sr.reveal(".section-4 .row");
@@ -95,6 +93,10 @@
         responsive:{
             0:{
                 items:1,
+                nav:true
+            },
+            360:{
+                items:2,
                 nav:true
             },
             600:{

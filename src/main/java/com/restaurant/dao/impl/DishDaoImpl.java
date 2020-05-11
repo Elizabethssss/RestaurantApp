@@ -16,6 +16,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Implementation of Dish DAO
+ */
+
 public class DishDaoImpl extends AbstractDao<DishEntity> implements DishDao {
     public static final String SAVE_QUERY = "INSERT INTO dishes VALUES (DEFAULT, ?, ?, ?, ?, ?, ?);";
     public static final String UPDATE_QUERY = "UPDATE dishes SET name = ?, about = ?, dish_type = ?," +
@@ -27,6 +31,8 @@ public class DishDaoImpl extends AbstractDao<DishEntity> implements DishDao {
 
     public static final String FIND_BY_ORDER_ID_QUERY = "select * from dishes left join orders_dishes on " +
             "orders_dishes.dish_id = dishes.id where order_id = ?;";
+    public static final String FIND_BY_LUNCH_ID_QUERY = "select * from dishes left join dishes_lunches on " +
+            "dishes_lunches.dish_id = dishes.id where lunch_id = ?;";
 
     public DishDaoImpl(HikariCPManager connector) {
         super(connector);
@@ -59,6 +65,11 @@ public class DishDaoImpl extends AbstractDao<DishEntity> implements DishDao {
             throw new DataBaseException("Error in getting by parameter from db", e);
         }
         return entityMap;
+    }
+
+    @Override
+    public List<DishEntity> getDishesByLunchId(Long lunchId) {
+        return findAllByParam(lunchId, FIND_BY_LUNCH_ID_QUERY);
     }
 
     @Override
