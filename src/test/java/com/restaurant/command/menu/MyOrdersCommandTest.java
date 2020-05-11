@@ -3,7 +3,6 @@ package com.restaurant.command.menu;
 import com.restaurant.domain.Dish;
 import com.restaurant.domain.Lunch;
 import com.restaurant.domain.Order;
-import com.restaurant.domain.OrderStatus;
 import com.restaurant.domain.User;
 import com.restaurant.service.DishService;
 import com.restaurant.service.LunchService;
@@ -22,9 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;

@@ -1,6 +1,5 @@
 package com.restaurant.domain;
 
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -50,13 +49,13 @@ public class Lunch {
     }
 
     public String getWeight() {
-        String weight = "";
+        StringBuilder weight = new StringBuilder();
         for (Dish dish : dishes) {
-            weight += dish.getWeight() + " ";
+            weight.append(dish.getWeight()).append(" ");
         }
-        weight = weight.trim();
-        weight = weight.replaceAll(" ", " / ");
-        return weight;
+        weight = new StringBuilder(weight.toString().trim());
+        weight = new StringBuilder(weight.toString().replace(" ", " / "));
+        return weight.toString();
     }
 
     public String getImg() {

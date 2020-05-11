@@ -6,8 +6,6 @@ import com.restaurant.service.OrderService;
 import com.restaurant.service.UserService;
 import com.restaurant.service.util.Localization;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

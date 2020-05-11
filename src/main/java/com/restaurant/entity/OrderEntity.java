@@ -1,12 +1,8 @@
 package com.restaurant.entity;
 
-import com.restaurant.domain.Dish;
-import com.restaurant.domain.Lunch;
 import com.restaurant.domain.OrderStatus;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 
 public class OrderEntity {
     private final Long id;

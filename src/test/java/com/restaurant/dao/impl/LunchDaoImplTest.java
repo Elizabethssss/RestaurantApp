@@ -1,13 +1,9 @@
 package com.restaurant.dao.impl;
 
-import com.restaurant.dao.DishDao;
 import com.restaurant.dao.LunchDao;
 import com.restaurant.dao.Page;
 import com.restaurant.dao.connection.HikariCPManager;
-import com.restaurant.domain.DishType;
-import com.restaurant.domain.Lunch;
 import com.restaurant.domain.LunchType;
-import com.restaurant.entity.DishEntity;
 import com.restaurant.entity.LunchEntity;
 import org.junit.After;
 import org.junit.Before;
@@ -20,14 +16,14 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.Statement;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class LunchDaoImplTest {
     private static final String DB_PROP_PATH = "h2_test_db";
     private static final String SCHEMA_PATH = "src/test/resources/schema.sql";
     private static final String DATA_PATH = "src/test/resources/data.sql";
     private static final Page PAGE = new Page(0, 5);
-    private static final Long ID = 1L;
 
     private HikariCPManager manager;
     private LunchEntity lunchEntity;

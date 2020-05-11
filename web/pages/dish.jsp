@@ -5,7 +5,7 @@
   Time: 4:44 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +49,7 @@
                         <p class="para-1">${requestScope.dish.about}</p>
                         <p class="weight">${requestScope.bundle.getString("weight")}: ${requestScope.dish.weight}
                             ${requestScope.bundle.getString("weight.g")}</p>
-                        <p class="price">${requestScope.bundle.getString("price")}: ${requestScope.dish.getPriceInt()}
+                        <p class="price">${requestScope.bundle.getString("price")}: ${requestScope.dish.priceInt}
                             ${requestScope.bundle.getString("uah")}</p>
                         <button type="submit" class="btn px-4 py-1 btn-outline-warning">
                             ${requestScope.bundle.getString("buy")}

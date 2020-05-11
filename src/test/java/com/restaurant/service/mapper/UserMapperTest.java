@@ -4,7 +4,6 @@ import com.restaurant.domain.Role;
 import com.restaurant.domain.User;
 import com.restaurant.entity.UserEntity;
 import com.restaurant.service.util.PasswordEncryptor;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +13,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 

@@ -42,4 +42,4 @@ INSERT INTO `dishes_lunches` VALUES (1,1,1),(2,2,1);
 INSERT INTO `orders_dishes` VALUES
 (1, 8, 1), (2, 8, 2), (3, 9, 3), (4, 10, 2), (5, 13, 1), (6, 8, 1), (7, 8, 2);
 
-INSERT INTO `orders_lunches` VALUES (1,11,1),(2,11,1),(3,12,1),(4,11,2),(5,11,2);
+INSERT INTO `orders_lunches` VALUES (1,11,1),(2,11,1),(3,12,1),(4,11,2),(5,11,2),(6,8,2);

@@ -10,6 +10,7 @@ import com.restaurant.command.purchase.CreditCardCommand;
 import com.restaurant.command.menu.MyOrdersCommand;
 import com.restaurant.command.purchase.PlaceOrderCommand;
 import com.restaurant.command.user.AdminCommand;
+import com.restaurant.command.user.ErrorCommand;
 import com.restaurant.command.user.LoginCommand;
 import com.restaurant.command.user.LogoutCommand;
 import com.restaurant.command.user.SignUpCommand;
@@ -103,6 +104,7 @@ public final class ApplicationInjector {
     private static final Command MY_ORDERS_COMMAND = new MyOrdersCommand(ORDER_SERVICE, DISH_SERVICE, LUNCH_SERVICE, LOCALIZATION);
     private static final Command PLACE_ORDER_COMMAND = new PlaceOrderCommand(ORDER_SERVICE, DISH_SERVICE, LUNCH_SERVICE);
     private static final Command CREDIT_CARD_COMMAND = new CreditCardCommand(ORDER_SERVICE, LOCALIZATION);
+    private static final Command ERROR_500 = new ErrorCommand(LOCALIZATION);
 
     private static final Map<String, Command> COMMANDS = initCommands();
 
@@ -120,7 +122,7 @@ public final class ApplicationInjector {
         authorizationCommands.put("/myOrders", MY_ORDERS_COMMAND);
         authorizationCommands.put("/placeOrder", PLACE_ORDER_COMMAND);
         authorizationCommands.put("/creditCard", CREDIT_CARD_COMMAND);
-
+        authorizationCommands.put("/error", ERROR_500);
 
         return Collections.unmodifiableMap(authorizationCommands);
     }

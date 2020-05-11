@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
+import static com.restaurant.command.util.Util.*;
+
 @WebServlet(name = "FrontController", urlPatterns = {"/login", "/signUp", "/logout", "/index", "/menu",
-        "/myOrders", "/dish", "/lunch", "/basket", "/placeOrder", "/creditCard", "/admin"})
+        "/myOrders", "/dish", "/lunch", "/basket", "/placeOrder", "/creditCard", "/admin", "/error"})
 public class FrontController extends HttpServlet {
     private final Map<String, Command> commands;
 
@@ -44,27 +46,22 @@ public class FrontController extends HttpServlet {
     }
 
     private void processCommand(HttpServletRequest request, HttpServletResponse response, String answer) throws IOException, ServletException {
-        if (request.getAttribute("responseType").equals("servlet")) {
+        if (request.getAttribute(RESPONSE_TYPE).equals(SERVLET)) {
             response.sendRedirect(request.getContextPath() + answer);
         }
-        else if(request.getAttribute("responseType").equals("json")) {
+        else if(request.getAttribute(RESPONSE_TYPE).equals(JSON_OBJECT)) {
             PrintWriter out = response.getWriter();
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             out.print(answer);
             out.flush();
         }
-        else if(request.getAttribute("responseType").equals("jsp")) {
+        else if(request.getAttribute(RESPONSE_TYPE).equals(JSP)) {
             request.getRequestDispatcher(answer).forward(request, response);
         }
         else {
             request.getRequestDispatcher(answer).forward(request, response);
         }
-//        if (!answer.contains(".jsp")) {
-//            response.sendRedirect(request.getContextPath() + answer);
-//        } else {
-//            request.getRequestDispatcher(answer).forward(request, response);
-//        }
     }
 
     private Command getCommand(HttpServletRequest request) {

@@ -6,7 +6,7 @@ public class Util {
     public static final String JSON_OBJECT = "json";
     public static final String SERVLET = "servlet";
     public static final String LOCALE = "locale";
-
+    public static final String MESSAGE = "message";
 
     private Util() {}
 }

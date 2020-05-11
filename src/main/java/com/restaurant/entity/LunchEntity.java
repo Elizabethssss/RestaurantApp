@@ -2,7 +2,6 @@ package com.restaurant.entity;
 
 import com.restaurant.domain.LunchType;
 
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
 

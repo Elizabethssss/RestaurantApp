@@ -1,13 +1,10 @@
 package com.restaurant.service.impl;
 
 import com.restaurant.dao.UserDao;
-import com.restaurant.domain.Order;
 import com.restaurant.domain.User;
 import com.restaurant.entity.UserEntity;
 import com.restaurant.service.mapper.Mapper;
 import com.restaurant.service.validator.UserValidator;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,9 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;

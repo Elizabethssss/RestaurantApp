@@ -3,7 +3,6 @@ package com.restaurant.command.purchase;
 import com.restaurant.domain.Order;
 import com.restaurant.service.OrderService;
 import com.restaurant.service.util.Localization;
-import com.restaurant.service.validator.CreditCardValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

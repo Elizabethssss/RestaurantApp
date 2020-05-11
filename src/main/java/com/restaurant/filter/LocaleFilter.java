@@ -24,10 +24,6 @@ public class LocaleFilter implements Filter {
         String locale = req.getParameter("lang");
         if (!Arrays.asList(ApplicationInjector.LANGUAGES).contains(locale)) {
             locale = ApplicationInjector.LANGUAGE_DEFAULT;
-//            session.setAttribute("locale", locale);
-//            String queryString = ((HttpServletRequest) request).getQueryString();
-//            String newURL = queryString.substring(0, queryString.lastIndexOf("=") + 1) + "en";
-//            request.getRequestDispatcher(((HttpServletRequest) request).getRequestURI() + "?" + newURL).forward(request, response);
         }
         session.setAttribute("locale", locale);
         chain.doFilter(req, res);

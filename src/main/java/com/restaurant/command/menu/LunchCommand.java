@@ -36,19 +36,19 @@ public class LunchCommand implements Command {
     public String show(HttpServletRequest request) {
         final HttpSession session = request.getSession();
         final Long lunchId = Long.valueOf(request.getParameter("id"));
-        final Optional<Lunch> lunch = lunchService.getLunchById(lunchId);
-        final String message = (String) session.getAttribute("message");
-        session.removeAttribute("message");
+        final Lunch lunch = lunchService.getLunchById(lunchId).orElse(Lunch.builder().build());
+        final String message = (String) session.getAttribute(MESSAGE);
+        session.removeAttribute(MESSAGE);
 
-        lunch.get().getDishes().addAll(dishService.getDishesByLunchId(lunch.get().getId()));
-        int price = lunch.get().getPrice();
-        String weight = lunch.get().getWeight();
-        if(lunch.get().getTimeFrom().compareTo(LocalTime.now()) > 0 ||
-                lunch.get().getTimeTo().compareTo(LocalTime.now()) < 0) {
+        lunch.getDishes().addAll(dishService.getDishesByLunchId(lunch.getId()));
+        int price = lunch.getPrice();
+        String weight = lunch.getWeight();
+        if(lunch.getTimeFrom().compareTo(LocalTime.now()) > 0 ||
+                lunch.getTimeTo().compareTo(LocalTime.now()) < 0) {
             request.setAttribute("disabled", true);
         }
 
-        setShowAttributes(request, lunch.get(), message, price, weight);
+        setShowAttributes(request, lunch, message, price, weight);
         request.setAttribute(RESPONSE_TYPE, JSP);
         return "pages/lunch.jsp";
     }
@@ -67,8 +67,11 @@ public class LunchCommand implements Command {
         if(lunch.isPresent() && lunch.get().getTimeFrom().compareTo(LocalTime.now()) < 0 &&
                     lunch.get().getTimeTo().compareTo(LocalTime.now()) > 0) {
                 Optional<Order> formingOrder = orderService.getOrderByStatusAndUserId(OrderStatus.FORMED, user.getId());
-                final Long orderId = formingOrder.get().getId();
-                orderService.addLunchToOrder(orderId, lunchId);
+                if(formingOrder.isPresent()) {
+                    final Long orderId = formingOrder.get().getId();
+                    orderService.addLunchToOrder(orderId, lunchId);
+                }
+
                 inBasket++;
                 message = bundle.getString("added.lunch");
             }
@@ -83,13 +86,13 @@ public class LunchCommand implements Command {
         request.setAttribute("price", price);
         request.setAttribute("weight", weight);
         request.setAttribute("lunch", lunch);
-        request.setAttribute("message", message);
+        request.setAttribute(MESSAGE, message);
     }
 
     private void setExecuteAttributes(HttpServletRequest request, HttpSession session, User user, int inBasket, ResourceBundle bundle, String message) {
         session.setAttribute("inBasket", inBasket);
         session.setAttribute("user", user);
-        session.setAttribute("message", message);
+        session.setAttribute(MESSAGE, message);
         request.setAttribute("bundle", bundle);
     }
 }

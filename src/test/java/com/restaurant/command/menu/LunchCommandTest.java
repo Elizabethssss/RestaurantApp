@@ -1,6 +1,5 @@
 package com.restaurant.command.menu;
 
-import com.restaurant.domain.Dish;
 import com.restaurant.domain.Lunch;
 import com.restaurant.domain.LunchType;
 import com.restaurant.domain.Order;

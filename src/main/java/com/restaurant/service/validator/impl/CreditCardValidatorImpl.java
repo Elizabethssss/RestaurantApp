@@ -14,19 +14,21 @@ public class CreditCardValidatorImpl implements CreditCardValidator {
     private static final String CARD_MONTH_INPUT = "(0[1-9]|1[0-2])";
     private static final String CARD_YEAR_INPUT = "([2-3][0-9])";
 
+    public static final String CARD_NUMBER_ERROR = "cardNumberError";
+
     @Override
     public Map<String, String> validate(String cardNumber, String expiredMonth, String expiredYear,
                                         String cvv, ResourceBundle bundle) {
         final String emptyMsg = bundle.getString("empty.field");
         Map<String, String> errorMessages = new HashMap<>();
         if (cardNumber.equals("")) {
-            errorMessages.put("cardNumberError", emptyMsg);
+            errorMessages.put(CARD_NUMBER_ERROR, emptyMsg);
         }
         else if(!cardNumber.matches(CARD_NUMBER_INPUT)) {
-            errorMessages.put("cardNumberError", bundle.getString("wrong.input"));
+            errorMessages.put(CARD_NUMBER_ERROR, bundle.getString("wrong.input"));
         }
         else if(!validateCreditCardNumber(cardNumber)) {
-            errorMessages.put("cardNumberError", bundle.getString("wrong.card.number"));
+            errorMessages.put(CARD_NUMBER_ERROR, bundle.getString("wrong.card.number"));
         }
         if(expiredMonth.equals("") || expiredYear.equals("")) {
             errorMessages.put("dateError", emptyMsg);

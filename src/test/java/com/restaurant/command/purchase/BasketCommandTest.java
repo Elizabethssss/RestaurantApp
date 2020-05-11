@@ -1,6 +1,5 @@
 package com.restaurant.command.purchase;
 
-import com.restaurant.command.menu.MyOrdersCommand;
 import com.restaurant.domain.Dish;
 import com.restaurant.domain.Lunch;
 import com.restaurant.domain.Order;
@@ -20,14 +19,13 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -48,8 +46,6 @@ public class BasketCommandTest {
     private static final Dish DISH = Dish.builder().withId(1L).build();
     private static final Lunch LUNCH = Lunch.builder().withId(1L).withDishes(new ArrayList<>()).build();
     private static final OrderStatus ORDER_STATUS = OrderStatus.FORMED;
-    private static List<Order> ORDER_LIST;
-    private static List<Dish> DISH_LIST = new ArrayList<>();
     private static Map<Dish, Integer> DISH_INTEGER_MAP;
     private static Map<Lunch, Integer> LUNCH_INTEGER_MAP;
 

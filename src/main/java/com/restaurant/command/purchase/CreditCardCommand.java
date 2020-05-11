@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static com.restaurant.command.util.Util.*;
@@ -31,11 +30,10 @@ public class CreditCardCommand implements Command {
     @Override
     public String show(HttpServletRequest request) {
         final Long orderId = Long.valueOf(request.getParameter("id"));
-        final Optional<Order> order = orderService.getOrderById(orderId);
-        final int total = order.get().getCost();
+        final Order order = orderService.getOrderById(orderId).orElse(Order.builder().build());
 
         request.setAttribute("bundle", localization.getLocalizationBundle(request));
-        setAttributes(request, orderId, total);
+        setAttributes(request, orderId, order.getCost());
         request.setAttribute(RESPONSE_TYPE, JSP);
         return "pages/creditCard.jsp";
     }
@@ -48,8 +46,7 @@ public class CreditCardCommand implements Command {
         final String cvv = request.getParameter("cvv");
 
         final Long orderId = Long.valueOf(request.getParameter("id"));
-        final Optional<Order> order = orderService.getOrderById(orderId);
-        final int total = order.get().getCost();
+        final Order order = orderService.getOrderById(orderId).orElse(Order.builder().build());
 
         final HttpSession session = request.getSession();
         final ResourceBundle bundle = localization.getLocalizationBundle(request);
@@ -65,7 +62,7 @@ public class CreditCardCommand implements Command {
         }
         else {
             setErrorAttributes(request, cardNumber, expiredMonth, expiredYear, errorsMessages);
-            setAttributes(request, orderId, total);
+            setAttributes(request, orderId, order.getCost());
             request.setAttribute(RESPONSE_TYPE, JSP);
             return "pages/creditCard.jsp";
         }

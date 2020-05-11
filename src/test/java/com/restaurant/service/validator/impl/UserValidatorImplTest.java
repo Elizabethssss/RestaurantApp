@@ -1,28 +1,14 @@
 package com.restaurant.service.validator.impl;
 
 import com.restaurant.domain.User;
-import com.restaurant.service.util.Localization;
-import com.restaurant.service.util.UTF8Control;
-import com.restaurant.service.validator.UserValidator;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import javax.servlet.http.HttpServletRequest;
 
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class UserValidatorImplTest {
     private final ResourceBundle bundle = ResourceBundle.getBundle("locale", Locale.getDefault());

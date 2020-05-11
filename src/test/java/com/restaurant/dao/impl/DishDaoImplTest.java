@@ -1,11 +1,9 @@
 package com.restaurant.dao.impl;
 
 import com.restaurant.dao.DishDao;
-import com.restaurant.dao.DishDao;
 import com.restaurant.dao.Page;
 import com.restaurant.dao.connection.HikariCPManager;
 import com.restaurant.domain.DishType;
-import com.restaurant.domain.Role;
 import com.restaurant.entity.DishEntity;
 import com.restaurant.exception.DataBaseException;
 import org.junit.After;

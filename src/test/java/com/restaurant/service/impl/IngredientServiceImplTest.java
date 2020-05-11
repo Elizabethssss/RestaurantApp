@@ -3,7 +3,6 @@ package com.restaurant.service.impl;
 import com.restaurant.dao.IngredientDao;
 import com.restaurant.domain.Ingredient;
 import com.restaurant.entity.IngredientEntity;
-import com.restaurant.service.IngredientService;
 import com.restaurant.service.mapper.Mapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;

@@ -1,13 +1,12 @@
 package com.restaurant.dao.impl;
 
+import com.restaurant.dao.DishDao;
 import com.restaurant.dao.LunchDao;
 import com.restaurant.dao.OrderDao;
 import com.restaurant.dao.Page;
 import com.restaurant.dao.connection.HikariCPManager;
-import com.restaurant.domain.LunchType;
-import com.restaurant.domain.Order;
 import com.restaurant.domain.OrderStatus;
-import com.restaurant.domain.User;
+import com.restaurant.entity.DishEntity;
 import com.restaurant.entity.LunchEntity;
 import com.restaurant.entity.OrderEntity;
 import com.restaurant.entity.UserEntity;
@@ -22,6 +21,7 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -36,6 +36,8 @@ public class OrderDaoImplTest {
     private OrderEntity orderEntity;
     private OrderEntity testOrderEntity;
     private OrderDao orderDao;
+    private LunchDao lunchDao;
+    private DishDao dishDao;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -53,6 +55,8 @@ public class OrderDaoImplTest {
             statement.close();
             connection.close();
             orderDao = new OrderDaoImpl(manager);
+            lunchDao = new LunchDaoImpl(manager);
+            dishDao = new DishDaoImpl(manager);
             setEntities();
         }
         catch (Exception e) {
@@ -77,17 +81,33 @@ public class OrderDaoImplTest {
 
     @Test
     public void addDishToOrder() {
+        final Map<DishEntity, Integer> dishesByOrderId = dishDao.getDishesByOrderId(orderEntity.getId());
+        final int size = dishesByOrderId.values().stream().reduce(0, Integer::sum);
         orderDao.addDishToOrder(orderEntity.getId(), ID);
+        final Map<DishEntity, Integer> dishesByOrderId1 = dishDao.getDishesByOrderId(orderEntity.getId());
+        final int size1 = dishesByOrderId1.values().stream().reduce(0, Integer::sum);
+        assertNotEquals(size, size1);
     }
 
     @Test
     public void updateOrderStatus() {
-        orderDao.updateOrderStatus(orderEntity.getId(), orderEntity.getStatus().name());
+        final OrderStatus orderEntityStatus = orderEntity.getStatus();
+        orderDao.updateOrderStatus(orderEntity.getId(), testOrderEntity.getStatus().name());
+        final OrderEntity orderEntity = orderDao.findById(this.orderEntity.getId()).orElse(OrderEntity.builder().build());
+        final OrderStatus orderStatus = orderEntity.getStatus();
+        assertNotEquals(orderEntityStatus, orderStatus);
     }
 
     @Test
     public void updateOrderCostAndStatus() {
-        orderDao.updateOrderCostAndStatus(orderEntity.getCost(), orderEntity.getId());
+        final OrderStatus orderEntityStatus = orderEntity.getStatus();
+        final int orderEntityCost = orderEntity.getCost();
+        orderDao.updateOrderCostAndStatus(testOrderEntity.getCost(), orderEntity.getId());
+        final OrderEntity orderEntity = orderDao.findById(this.orderEntity.getId()).orElse(OrderEntity.builder().build());
+        final OrderStatus orderStatus = orderEntity.getStatus();
+        final int orderCost = orderEntity.getCost();
+        assertNotEquals(orderEntityStatus, orderStatus);
+        assertNotEquals(orderEntityCost, orderCost);
     }
 
     @Test
@@ -102,17 +122,32 @@ public class OrderDaoImplTest {
 
     @Test
     public void addLunchToOrder() {
+        final Map<LunchEntity, Integer> lunchesByOrderId = lunchDao.getLunchesByOrderId(orderEntity.getId());
+        final int size = lunchesByOrderId.values().stream().reduce(0, Integer::sum);
         orderDao.addLunchToOrder(orderEntity.getId(), ID);
+        final Map<LunchEntity, Integer> lunchesByOrderId1 = lunchDao.getLunchesByOrderId(orderEntity.getId());
+        final int size1 = lunchesByOrderId1.values().stream().reduce(0, Integer::sum);
+        assertNotEquals(size, size1);
     }
 
     @Test
     public void deleteOrderDishById() {
+        final Map<DishEntity, Integer> dishesByOrderId = dishDao.getDishesByOrderId(orderEntity.getId());
+        final int size = dishesByOrderId.values().stream().reduce(0, Integer::sum);
         orderDao.deleteOrderDishById(orderEntity.getId(), ID, 1);
+        final Map<DishEntity, Integer> dishesByOrderId1 = dishDao.getDishesByOrderId(orderEntity.getId());
+        final int size1 = dishesByOrderId1.values().stream().reduce(0, Integer::sum);
+        assertNotEquals(size, size1);
     }
 
     @Test
     public void deleteOrderLunchById() {
+        final Map<LunchEntity, Integer> lunchesByOrderId = lunchDao.getLunchesByOrderId(orderEntity.getId());
+        final int size = lunchesByOrderId.values().stream().reduce(0, Integer::sum);
         orderDao.deleteOrderLunchById(orderEntity.getId(), ID, 1);
+        final Map<LunchEntity, Integer> lunchesByOrderId1 = lunchDao.getLunchesByOrderId(orderEntity.getId());
+        final int size1 = lunchesByOrderId1.values().stream().reduce(0, Integer::sum);
+        assertNotEquals(size, size1);
     }
 
     @Test

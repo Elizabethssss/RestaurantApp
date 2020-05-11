@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 import static com.restaurant.command.util.Util.*;
 
 public class DishCommand implements Command {
+
     private final DishService dishService;
     private final IngredientService ingredientService;
     private final OrderService orderService;
@@ -39,13 +40,13 @@ public class DishCommand implements Command {
         final Long dishId = Long.valueOf(request.getParameter("id"));
         final Optional<Dish> dish = dishService.getDishById(dishId);
         final List<Ingredient> ingredients = ingredientService.findIngredientsByDishId(dishId);
-        final String message = (String) session.getAttribute("message");
-        session.removeAttribute("message");
+        final String message = (String) session.getAttribute(MESSAGE);
+        session.removeAttribute(MESSAGE);
 
         request.setAttribute("bundle", localization.getLocalizationBundle(request));
-        request.setAttribute("dish", dish.get());
+        request.setAttribute("dish", dish.orElse(Dish.builder().build()));
         request.setAttribute("ingredients", ingredients);
-        request.setAttribute("message", message);
+        request.setAttribute(MESSAGE, message);
         request.setAttribute(RESPONSE_TYPE, JSP);
         return "pages/dish.jsp";
     }
@@ -58,8 +59,10 @@ public class DishCommand implements Command {
 
         final long dishId = Long.parseLong(request.getParameter("id"));
         Optional<Order> formingOrder = orderService.getOrderByStatusAndUserId(OrderStatus.FORMED, user.getId());
-        final Long orderId = formingOrder.get().getId();
-        orderService.addDishToOrder(orderId, dishId);
+        if (formingOrder.isPresent()) {
+            final Long orderId = formingOrder.get().getId();
+            orderService.addDishToOrder(orderId, dishId);
+        }
 
         int inBasket = (int) session.getAttribute("inBasket");
         final String message = bundle.getString("added.dish");
@@ -67,7 +70,7 @@ public class DishCommand implements Command {
 
         session.setAttribute("inBasket", inBasket);
         session.setAttribute("user", user);
-        session.setAttribute("message", message);
+        session.setAttribute(MESSAGE, message);
 
         request.setAttribute("bundle", bundle);
         request.setAttribute(RESPONSE_TYPE, SERVLET);

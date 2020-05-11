@@ -15,7 +15,6 @@ import org.json.JSONObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
-import java.util.Optional;
 
 import static com.restaurant.command.util.Util.*;
 
@@ -42,14 +41,14 @@ public class BasketCommand implements Command {
         final long userId = user.getId();
         double totalPrice = 0;
 
-        final Optional<Order> order = orderService.getOrderByStatusAndUserId(OrderStatus.FORMED, userId);
-        final Long orderId = order.get().getId();
-        final Map<Dish, Integer> dishes = dishService.getDishesByOrderId(orderId);
+        final Order order = orderService.getOrderByStatusAndUserId(OrderStatus.FORMED, userId)
+                .orElse(Order.builder().build());
+        final Map<Dish, Integer> dishes = dishService.getDishesByOrderId(order.getId());
         for (Map.Entry<Dish, Integer> entry : dishes.entrySet()) {
             totalPrice += entry.getKey().getPrice() * entry.getValue();
         }
 
-        Map<Lunch, Integer> lunchIntegerMap = lunchService.getLunchesByOrderId(orderId);
+        Map<Lunch, Integer> lunchIntegerMap = lunchService.getLunchesByOrderId(order.getId());
         for (Map.Entry<Lunch, Integer> entry : lunchIntegerMap.entrySet()) {
             entry.getKey().getDishes().addAll(dishService.getDishesByLunchId(entry.getKey().getId()));
             totalPrice += entry.getKey().getPrice() * entry.getValue();
@@ -70,8 +69,9 @@ public class BasketCommand implements Command {
         final HttpSession session = request.getSession();
         final User user = (User) session.getAttribute("user");
         int inBasket = (int) session.getAttribute("inBasket");
-        final Optional<Order> order = orderService.getOrderByStatusAndUserId(OrderStatus.FORMED, user.getId());
-        final Long orderId = order.get().getId();
+        final Order order = orderService.getOrderByStatusAndUserId(OrderStatus.FORMED, user.getId())
+                .orElse(Order.builder().build());
+        final Long orderId = order.getId();
 
         final Map<Dish, Integer> dishes = dishService.getDishesByOrderId(orderId);
         Map<Lunch, Integer> lunches = lunchService.getLunchesByOrderId(orderId);
@@ -182,7 +182,7 @@ public class BasketCommand implements Command {
                 lunches.replace(entry.getKey(), entry.getValue() + 1);
                 orderService.addLunchToOrder(orderId, id);
                 numOfItems = entry.getValue();
-                priceOfItems = entry.getKey().getPrice() * entry.getValue();
+                priceOfItems = entry.getKey().getPrice() * (double) entry.getValue();
                 inBasket++;
             }
         }
@@ -195,7 +195,7 @@ public class BasketCommand implements Command {
                 lunches.replace(entry.getKey(), entry.getValue() - 1);
                 orderService.deleteOrderLunchById(orderId, id, 1);
                 numOfItems = entry.getValue();
-                priceOfItems = entry.getKey().getPrice() * entry.getValue();
+                priceOfItems = entry.getKey().getPrice() * (double) entry.getValue();
                 inBasket--;
             } else if (entry.getKey().getId().equals(id) && entry.getValue() == 1) {
                 numOfItems = 1;

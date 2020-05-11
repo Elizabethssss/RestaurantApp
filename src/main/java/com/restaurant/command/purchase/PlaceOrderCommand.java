@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Map;
-import java.util.Optional;
 
 import static com.restaurant.command.util.Util.*;
 
@@ -33,10 +32,11 @@ public class PlaceOrderCommand implements Command {
     public String show(HttpServletRequest request) {
         final HttpSession session = request.getSession();
         final User user = (User) session.getAttribute("user");
-        final Optional<Order> order = orderService.getOrderByStatusAndUserId(OrderStatus.FORMED, user.getId());
+        final Order order = orderService.getOrderByStatusAndUserId(OrderStatus.FORMED, user.getId())
+                .orElse(Order.builder().build());
 
-        final Map<Dish, Integer> dishes = dishService.getDishesByOrderId(order.get().getId());
-        final Map<Lunch, Integer> lunches = lunchService.getLunchesByOrderId(order.get().getId());
+        final Map<Dish, Integer> dishes = dishService.getDishesByOrderId(order.getId());
+        final Map<Lunch, Integer> lunches = lunchService.getLunchesByOrderId(order.getId());
         int totalPrice = 0;
 
         for (Map.Entry<Dish, Integer> entry : dishes.entrySet()) {
@@ -47,7 +47,7 @@ public class PlaceOrderCommand implements Command {
             totalPrice += entry.getKey().getPrice() * entry.getValue();
         }
 
-        orderService.updateOrderCostAndStatus(totalPrice, order.get().getId());
+        orderService.updateOrderCostAndStatus(totalPrice, order.getId());
         Order newOrder = Order.builder()
                 .withStatus(OrderStatus.FORMED)
                 .withCost(0)

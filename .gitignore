@@ -3,7 +3,6 @@ logs
 out
 target
 *.iml
-src/main/resources/properties
 web/libs
 web/WEB-INF/lib
 web/WEB-INF/classes
