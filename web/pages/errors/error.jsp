@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="../../styles/commons/header.css" />
     <link rel="stylesheet" href="../../styles/commons/footer.css" />
     <link rel="stylesheet" href="../../styles/error.css" />
-    <link rel="stylesheet" href="../../libs/fontawesome-free-5.12.1-web/css/all.css"/>
+<%--    <link rel="stylesheet" href="../../libs/fontawesome-free-5.12.1-web/css/all.css"/>--%>
+
+    <script src="https://kit.fontawesome.com/6d63b0bfa0.js" crossorigin="anonymous"></script>
     <title>Error</title>
 </head>
 <body>

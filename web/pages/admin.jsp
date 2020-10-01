@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="../styles/commons/header.css" />
     <link rel="stylesheet" href="../styles/commons/footer.css" />
 
-    <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet">
     <title>Admin page</title>
 </head>
 <body>

@@ -14,7 +14,7 @@ html {
 body {
     padding: 0;
     margin: 0;
-    font-family: "Lato", sans-serif;
+    font-family: "Lato";
 }
 
 .bg {
@@ -31,7 +31,7 @@ main {
 }
 
 .navbar-brand {
-    font-family: "Pacifico", sans-serif;
+    font-family: "Pacifico";
     font-size: 35px;
     color: orange !important;
 }
@@ -40,7 +40,7 @@ main {
     font-size: 18px;
     margin: 15px;
     color: #000 !important;
-    font-family: "Roboto Condensed", sans-serif;
+    font-family: "Roboto Condensed";
 }
 
 .nav-link:hover {
@@ -73,11 +73,11 @@ main {
 
 .sendmoney_wrapper-frontSide {
     background: #eee;
-    min-width: 400px;
-    max-width: 400px;
+    min-width: 360px;
+    max-width: 360px;
     width: 100%;
     border-radius: 11.2px;
-    height: 240px;
+    height: 227px;
     box-sizing: border-box;
     position: relative;
     padding: 24px;
@@ -87,7 +87,7 @@ main {
 .sendmoney_frontSide-title {
     margin: 0;
     font-size: 20px;
-    font-family: Noto Sans, sans-serif;
+    font-family: Noto Sans;
     color: #6c6c6c;
 }
 
@@ -109,7 +109,7 @@ input:not([type="checkbox"]) {
     font-size: 17px;
     border: 1px solid #cbcbcb;
     line-height: 29px;
-    font-family: Noto Sans, sans-serif;
+    font-family: Noto Sans;
     width: 100%;
     color: #282828;
     border-radius: 0;
@@ -180,7 +180,7 @@ input:not([type="checkbox"]) {
 
 .section-5 h4 {
     margin-top: 15px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat";
     font-size: 20px;
     color: orange;
 }
@@ -203,8 +203,6 @@ input:not([type="checkbox"]) {
 .errorMsg {
     color: red;
     margin-bottom: 0;
-    display: inline-block;
-    padding-right: 7px;
 }
 
 .error-cvv {

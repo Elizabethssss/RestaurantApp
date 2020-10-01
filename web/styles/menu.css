@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Lato|Pacifico|Righteous|Roboto+Condensed|Ubuntu|Montserrat&display=swap");
 
 body {
-    padding: 0;
-    margin: 0;
-    font-family: "Lato", sans-serif;
+    padding: 0%;
+    margin: 0%;
+    font-family: "Lato";
 }
 
 .navbar-brand {
-    font-family: "Pacifico", sans-serif;
+    font-family: "Pacifico";
     font-size: 35px;
     color: orange !important;
 }
@@ -78,7 +78,7 @@ body {
 .site-title,
 .site-desc {
     color: yellow;
-    font-family: "Righteous", sans-serif;
+    font-family: "Righteous";
     text-align: center;
 }
 
@@ -90,7 +90,6 @@ body {
 
 .site-desc {
     font-size: 16px;
-    margin: 10px;
 }
 
 .site-btn1 {
@@ -152,7 +151,7 @@ body {
 }
 
 .text-content h4 {
-    font-family: "Righteous", sans-serif;
+    font-family: "Righteous";
 }
 
 .single-content:hover .text-content {
@@ -163,7 +162,7 @@ body {
 
 .section-5 h4 {
     margin-top: 15px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat";
     font-size: 20px;
     color: orange;
 }
@@ -198,10 +197,3 @@ body {
     border-color: black;
 }
 
-.my-pagination p {
-    display: inline;
-    margin: 10px;
-}
-.my-pagination a {
-    margin: 10px 0 !important;
-}

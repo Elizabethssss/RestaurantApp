@@ -5,23 +5,18 @@ import com.restaurant.dao.Page;
 import com.restaurant.dao.connection.HikariCPManager;
 import com.restaurant.domain.DishType;
 import com.restaurant.entity.DishEntity;
-import com.restaurant.exception.DataBaseException;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.Statement;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.Assert.*;
+import static org.testng.Assert.*;
 
-public class DishDaoImplTest {
+public class DishDaoImplTestNG {
     private static final String DB_PROP_PATH = "h2_test_db";
     private static final String SCHEMA_PATH = "src/test/resources/schema.sql";
     private static final String DATA_PATH = "src/test/resources/data.sql";
@@ -33,10 +28,7 @@ public class DishDaoImplTest {
     private DishEntity testDishEntity;
     private DishDao dishDao;
 
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
-
-    @Before
+    @BeforeMethod
     public void setUp() {
         try {
             manager = new HikariCPManager(DB_PROP_PATH);
@@ -56,71 +48,44 @@ public class DishDaoImplTest {
         }
     }
 
-    @After
-    public void tearDown() {
-        manager.shutdown();
-    }
-
     @Test
     public void getDishesByOrderId() {
         assertTrue(dishDao.getDishesByOrderId(8L).size() > 0);
-        assertThat(dishDao.getDishesByOrderId(8L).size(), greaterThan(0));
     }
 
     @Test
     public void getDishesByLunchId() {
         assertTrue(dishDao.getDishesByLunchId(ID).size() > 0);
-        assertThat(dishDao.getDishesByLunchId(ID).size(), greaterThan(0));
     }
 
     @Test
     public void findAll() {
         assertTrue(dishDao.findAll(DishType.SNACK.name(), PAGE).size() > 0);
-        assertThat(dishDao.findAll(DishType.SNACK.name(), PAGE).size(), greaterThan(0));
-    }
-
-    @Test
-    public void findAllShouldThrowException() {
-        exception.expect(DataBaseException.class);
-        assertTrue(dishDao.findAll(DishType.SNACK, PAGE).size() > 0);
-        assertThat(dishDao.findAll(DishType.SNACK, PAGE).size(), greaterThan(0));
     }
 
     @Test
     public void count() {
         assertTrue(dishDao.count(DishType.SNACK.name()) > 0);
-        assertThat(dishDao.count(DishType.SNACK.name()), greaterThan(0));
-    }
-
-    @Test
-    public void countShouldThrowException() {
-        exception.expect(DataBaseException.class);
-        assertTrue(dishDao.count(DishType.SNACK) > 0);
-        assertThat(dishDao.count(DishType.SNACK), greaterThan(0));
     }
 
     @Test
     public void save() {
         assertTrue(dishDao.save(testDishEntity));
-        assertThat(dishDao.save(testDishEntity), is(true));
     }
 
     @Test
     public void findById() {
         assertTrue(dishDao.findById(dishEntity.getId()).isPresent());
-        assertThat(dishDao.findById(dishEntity.getId()).isPresent(), is(true));
     }
 
     @Test
     public void update() {
         assertTrue(dishDao.update(dishEntity));
-        assertThat(dishDao.update(dishEntity), is(true));
     }
 
     @Test
     public void delete() {
         assertFalse(dishDao.delete(testDishEntity.getId()));
-        assertThat(dishDao.delete(testDishEntity.getId()), is(false));
     }
 
     private void setEntities() {
@@ -144,5 +109,10 @@ public class DishDaoImplTest {
                 .withWeight(70)
                 .withImage("chocolate_ice_cream.jpg")
                 .build();
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        manager.shutdown();
     }
 }

@@ -5,7 +5,7 @@
   Time: 4:44 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,10 +17,11 @@
     <link rel="stylesheet" href="../styles/dish.css" />
     <link rel="stylesheet" href="../styles/commons/header.css" />
     <link rel="stylesheet" href="../styles/commons/footer.css" />
-    <link rel="stylesheet" href="../libs/fontawesome-free-5.12.1-web/css/all.css"/>
+<%--    <link rel="stylesheet" href="../libs/fontawesome-free-5.12.1-web/css/all.css"/>--%>
     <link rel="stylesheet" href="../libs/owlcarousel/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="../libs/owlcarousel/dist/assets/owl.theme.default.min.css">
 
+    <script src="https://kit.fontawesome.com/6d63b0bfa0.js" crossorigin="anonymous"></script>
     <title>Dish</title>
 </head>
 <body>
@@ -42,14 +43,14 @@
             <div class="container p-0">
                 <div class="row">
                     <div class="col-md-6">
-                        <img class="dish-img" src="../img/dishes/${requestScope.dish.img}" alt="${requestScope.dish.name}" width="530"/>
+                        <img src="../img/dishes/${requestScope.dish.img}" alt="${requestScope.dish.name}" width="530"/>
                     </div>
-                    <div class="dish-description col-md-6">
+                    <div class="col-md-6">
                         <h1 class="text-white">${requestScope.dish.name}</h1>
                         <p class="para-1">${requestScope.dish.about}</p>
                         <p class="weight">${requestScope.bundle.getString("weight")}: ${requestScope.dish.weight}
                             ${requestScope.bundle.getString("weight.g")}</p>
-                        <p class="price">${requestScope.bundle.getString("price")}: ${requestScope.dish.priceInt}
+                        <p class="price">${requestScope.bundle.getString("price")}: ${requestScope.dish.getPriceInt()}
                             ${requestScope.bundle.getString("uah")}</p>
                         <button type="submit" class="btn px-4 py-1 btn-outline-warning">
                             ${requestScope.bundle.getString("buy")}
@@ -93,10 +94,6 @@
         responsive:{
             0:{
                 items:1,
-                nav:true
-            },
-            360:{
-                items:2,
                 nav:true
             },
             600:{

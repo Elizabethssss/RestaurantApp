@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="../styles/index.css" />
   <link rel="stylesheet" href="../styles/commons/header.css" />
   <link rel="stylesheet" href="../styles/commons/footer.css" />
-  <link rel="stylesheet" href="../libs/fontawesome-free-5.12.1-web/css/all.css"/>
+<%--  <link rel="stylesheet" href="../libs/fontawesome-free-5.12.1-web/css/all.css"/>--%>
+
+  <script src="https://kit.fontawesome.com/6d63b0bfa0.js" crossorigin="anonymous"></script>
   <title>${requestScope.bundle.getString("home")}</title>
 </head>
 <body>
@@ -39,7 +41,7 @@
         consequatur! Rerum sequi recusandae id molestias totam fuga mollitia, impedit voluptates
         assumenda dolor et minima reprehenderit necessitatibus harum iste! A, veritatis?</p>
 
-      <div class="cards row">
+      <div class="row justify-content-center text-center">
         <div class="col-md-4">
           <div class="card">
             <img src="../img/img1.jpg" alt="Image1" class="card-img-top" />

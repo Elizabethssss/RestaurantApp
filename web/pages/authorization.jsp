@@ -83,6 +83,6 @@
     <p>${requestScope.bundle.getString("footer.1")} <img src="../img/heart.png" alt="" /> ${requestScope.bundle.getString("footer.2")}</p>
 </footer>
 
-<script src="../js/app.js"></script>
+<script src="../app.js"></script>
 </body>
 </html>

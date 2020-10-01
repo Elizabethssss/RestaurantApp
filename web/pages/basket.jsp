@@ -5,7 +5,7 @@
   Time: 7:17 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,10 +14,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap CDN CSS file-->
     <link rel="stylesheet" href="../libs/bootstrap-4.4.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../libs/fontawesome-free-5.12.1-web/css/all.css"/>
+<%--    <link rel="stylesheet" href="../libs/fontawesome-free-5.12.1-web/css/all.css"/>--%>
     <link rel="stylesheet" href="../styles/basket.css" />
     <link rel="stylesheet" href="../styles/commons/header.css" />
     <link rel="stylesheet" href="../styles/commons/footer.css" />
+
+    <script src="https://kit.fontawesome.com/6d63b0bfa0.js" crossorigin="anonymous"></script>
     <title>Basket</title>
 </head>
 <body>
@@ -26,7 +28,7 @@
     <div class="section-1 bg">
         <div class="container">
             <h1 class="basket-title"><span>${requestScope.bundle.getString("your.dishes")}:</span></h1>
-            <c:if test="${requestScope.dishes.isEmpty() && requestScope.lunchIntegerMap.isEmpty()}">
+            <c:if test="${requestScope.dishes.isEmpty()}">
                 <div class="no-dishes">${requestScope.bundle.getString("no.dishes")}</div>
             </c:if>
 
@@ -80,7 +82,7 @@
                     </div>
                 </c:forEach>
             </div>
-                <div class="row ${(requestScope.dishes.isEmpty() && requestScope.lunchIntegerMap.isEmpty()) ? 'hide':''}">
+                <div class="row ${requestScope.dishes.isEmpty() ? 'hide':''}">
                     <div class="col-10 total-price mt-4 text-right">
                         <h2 class="total">${requestScope.bundle.getString("total")}: <span id="totalPrice">${requestScope.totalPrice}</span>
                             ${requestScope.bundle.getString("uah")}</h2>

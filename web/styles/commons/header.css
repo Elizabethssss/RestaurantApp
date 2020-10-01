@@ -9,17 +9,16 @@
     margin: 15px;
     color: #000 !important;
     font-family: "Roboto Condensed", sans-serif;
-    /*border-bottom: 2px solid transparent;*/
 }
 
 .nav-link:hover {
     color: orange !important;
 }
 
-.active.nav-link {
+.active .nav-link {
     color: orange !important;
-    /*border-bottom: 2px solid #aaaaaa;*/
 }
+
 
 .menu-right-btn {
     padding: 13px 46px;

@@ -14,12 +14,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap CDN CSS file-->
     <link rel="stylesheet" href="../libs/bootstrap-4.4.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../libs/fontawesome-free-5.12.1-web/css/all.css"/>
+<%--    <link rel="stylesheet" href="../libs/fontawesome-free-5.12.1-web/css/all.css"/>--%>
     <link rel="stylesheet" href="../styles/myOrders.css" />
     <link rel="stylesheet" href="../styles/commons/header.css" />
     <link rel="stylesheet" href="../styles/commons/footer.css" />
 
-    <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6d63b0bfa0.js" crossorigin="anonymous"></script>
     <title>My Orders</title>
 </head>
 <body>
